@@ -41,6 +41,39 @@ const STORE_PROJECTS = [
       'Intuitive iOS Mobile Interface',
       'High Performance & Scalable Codebase'
     ]
+  },
+  {
+    id: 'ai-visual-editor',
+    name: 'AI Visual Editor',
+    tagline: 'AI-Powered Visual Content Creation Platform',
+    desc: "Developed an intelligent visual editing application that enables users to generate, edit, enhance, and customize graphics using AI-powered tools. The platform streamlines content creation workflows and helps teams produce professional-quality visuals faster. Inspired by Microsoft's AI visual creation capabilities.",
+    icon: <Sparkles className="w-5 h-5" />,
+    badge: 'iOS App',
+    features: [
+      'AI Image Generation',
+      'Smart Visual Editing Tools',
+      'Background Removal & Replacement',
+      'Content Enhancement & Optimization',
+      'Brand-Aware Design Support',
+      'Modern User-Friendly Interface'
+    ]
+  },
+  {
+    id: 'xo-arena',
+    name: 'XO Arena',
+    tagline: 'Multiplayer Strategy Game (iOS App)',
+    desc: 'Built an engaging iOS gaming experience that transforms the classic Tic-Tac-Toe concept into a competitive multiplayer arena with advanced gameplay mechanics, intelligent AI opponents, leaderboards, and progression systems.',
+    icon: <Gamepad2 className="w-5 h-5" />,
+    badge: 'iOS App',
+    features: [
+      'Smart Adaptive AI Opponents',
+      'Online & Offline Gameplay',
+      'Multiplayer Matchmaking',
+      'Achievements & Rankings',
+      'Game Statistics & Analytics',
+      'Cross-Device Progress Sync',
+      'Modern 3D User Experience'
+    ]
   }
 ];
 
@@ -138,10 +171,10 @@ export default function Projects() {
           <SectionHeading
             eyebrow="iOS App Store Applications"
             title="iOS App Store Applications"
-            description="Showcasing native iOS applications developed for workforce management and enterprise asset tracking."
+            description="Showcasing native iOS applications developed for workforce management, enterprise asset tracking, AI-powered productivity, and strategy gaming."
             align="center"
           />
-          <div className="grid-two" style={{ alignItems: 'start' }}>
+          <div className="grid-four" style={{ alignItems: 'start' }}>
             {STORE_PROJECTS.map((project) => {
               const isExpanded = !!expandedCards[project.id];
               return (

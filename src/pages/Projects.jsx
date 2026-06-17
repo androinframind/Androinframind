@@ -41,38 +41,6 @@ const STORE_PROJECTS = [
       'Intuitive iOS Mobile Interface',
       'High Performance & Scalable Codebase'
     ]
-  },
-  {
-    id: 'ai-visual-editor',
-    name: 'AI Visual Editor',
-    tagline: 'AI-Powered Visual Content Creation Platform',
-    desc: 'Developed an intelligent visual editing application that enables users to generate, edit, enhance, and customize graphics using AI-powered tools. The platform streamlines content creation workflows and helps teams create professional-quality visual content.',
-    icon: <Sparkles className="w-5 h-5" />,
-    badge: 'Microsoft App',
-    features: [
-      'AI Image Generation',
-      'Smart Visual Editing Tools',
-      'Background Removal & Replacement',
-      'Content Enhancement & Optimization',
-      'Brand-Aware Design Support',
-      'Modern User Experience'
-    ]
-  },
-  {
-    id: 'xo-arena',
-    name: 'XO Arena',
-    tagline: 'Multiplayer Strategy Gaming Platform',
-    desc: 'Developed an engaging Microsoft gaming application that transforms classic strategy gameplay into a competitive multiplayer experience with intelligent AI, progression systems, and interactive challenges.',
-    icon: <Gamepad2 className="w-5 h-5" />,
-    badge: 'Microsoft Game',
-    features: [
-      'Smart AI Opponents',
-      'Multiplayer Gameplay',
-      'Rankings & Achievements',
-      'Performance Analytics',
-      'Progress Tracking',
-      'Modern Gaming Interface'
-    ]
   }
 ];
 
@@ -168,12 +136,12 @@ export default function Projects() {
       <section className="section section-muted">
         <div className="container">
           <SectionHeading
-            eyebrow="iOS App Store & Microsoft Applications"
-            title="Native iOS & Microsoft Store Applications"
-            description="Showcasing native applications and digital products developed for workforce management, enterprise operations, AI-powered productivity, and interactive gaming experiences."
+            eyebrow="iOS App Store Applications"
+            title="iOS App Store Applications"
+            description="Showcasing native iOS applications developed for workforce management and enterprise asset tracking."
             align="center"
           />
-          <div className="grid-four" style={{ alignItems: 'start' }}>
+          <div className="grid-two" style={{ alignItems: 'start' }}>
             {STORE_PROJECTS.map((project) => {
               const isExpanded = !!expandedCards[project.id];
               return (

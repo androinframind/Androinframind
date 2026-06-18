@@ -48,7 +48,7 @@ const STORE_PROJECTS = [
     tagline: 'AI-Powered Visual Content Creation Platform',
     desc: "Developed an intelligent visual editing application that enables users to generate, edit, enhance, and customize graphics using AI-powered tools. The platform streamlines content creation workflows and helps teams produce professional-quality visuals faster. Inspired by Microsoft's AI visual creation capabilities.",
     icon: <Sparkles className="w-5 h-5" />,
-    badge: 'iOS App',
+    badge: 'Microsoft apps',
     features: [
       'AI Image Generation',
       'Smart Visual Editing Tools',
@@ -64,7 +64,7 @@ const STORE_PROJECTS = [
     tagline: 'Multiplayer Strategy Game (iOS App)',
     desc: 'Built an engaging iOS gaming experience that transforms the classic Tic-Tac-Toe concept into a competitive multiplayer arena with advanced gameplay mechanics, intelligent AI opponents, leaderboards, and progression systems.',
     icon: <Gamepad2 className="w-5 h-5" />,
-    badge: 'iOS App',
+    badge: 'Microsoft games',
     features: [
       'Smart Adaptive AI Opponents',
       'Online & Offline Gameplay',

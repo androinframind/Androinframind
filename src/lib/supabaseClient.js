@@ -92,7 +92,11 @@ export async function fetchProjects() {
 export async function saveProject(project) {
   try {
     if (supabaseUrl.includes('placeholder-project')) return { success: false };
-    const { data, error } = await supabase.from('projects').upsert([project]).select();
+    const payload = { ...project };
+    if (!payload.id) {
+      delete payload.id;
+    }
+    const { data, error } = await supabase.from('projects').upsert([payload]).select();
     if (error) throw error;
     return { success: true, data };
   } catch (error) {
@@ -128,7 +132,11 @@ export async function fetchBlogs() {
 export async function saveBlog(blog) {
   try {
     if (supabaseUrl.includes('placeholder-project')) return { success: false };
-    const { data, error } = await supabase.from('blogs').upsert([blog]).select();
+    const payload = { ...blog };
+    if (!payload.id) {
+      delete payload.id;
+    }
+    const { data, error } = await supabase.from('blogs').upsert([payload]).select();
     if (error) throw error;
     return { success: true, data };
   } catch (error) {
@@ -148,4 +156,85 @@ export async function deleteBlog(id) {
     return { success: false, error: getErrorMessage(error) };
   }
 }
+
+export async function fetchJobs() {
+  try {
+    if (supabaseUrl.includes('placeholder-project')) return { success: false, data: [] };
+    const { data, error } = await supabase.from('jobs').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error fetching jobs:', error);
+    return { success: false, error: getErrorMessage(error) };
+  }
+}
+
+export async function saveJob(job) {
+  try {
+    if (supabaseUrl.includes('placeholder-project')) return { success: false };
+    const payload = { ...job };
+    if (!payload.id) {
+      delete payload.id;
+    }
+    const { data, error } = await supabase.from('jobs').upsert([payload]).select();
+    if (error) throw error;
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error saving job:', error);
+    return { success: false, error: getErrorMessage(error) };
+  }
+}
+
+export async function deleteJob(id) {
+  try {
+    if (supabaseUrl.includes('placeholder-project')) return { success: false };
+    const { error } = await supabase.from('jobs').delete().eq('id', id);
+    if (error) throw error;
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting job:', error);
+    return { success: false, error: getErrorMessage(error) };
+  }
+}
+
+export async function saveJobApplication(app) {
+  try {
+    if (supabaseUrl.includes('placeholder-project')) {
+      saveToLocal('andro_job_applications', app);
+      return { success: true };
+    }
+    const { data, error } = await supabase.from('job_applications').insert([app]).select();
+    if (error) throw error;
+    return { success: true, data };
+  } catch (error) {
+    console.warn('Supabase job application insert failed, falling back to localStorage:', getErrorMessage(error));
+    saveToLocal('andro_job_applications', app);
+    return { success: true };
+  }
+}
+
+export async function fetchJobApplications() {
+  try {
+    if (supabaseUrl.includes('placeholder-project')) return { success: false, data: [] };
+    const { data, error } = await supabase.from('job_applications').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error fetching job applications:', error);
+    return { success: false, error: getErrorMessage(error) };
+  }
+}
+
+export async function deleteJobApplication(id) {
+  try {
+    if (supabaseUrl.includes('placeholder-project')) return { success: false };
+    const { error } = await supabase.from('job_applications').delete().eq('id', id);
+    if (error) throw error;
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting job application:', error);
+    return { success: false, error: getErrorMessage(error) };
+  }
+}
+
 

@@ -1,11 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Menu, Search, X } from 'lucide-react';
+import { ArrowRight, Menu, Search, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BrandMark from '@/components/site/BrandMark';
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/services', label: 'Services' },
+  { 
+    to: '/services', 
+    label: 'Services',
+    dropdown: [
+      { to: '/services', label: 'Custom Software' },
+      { to: '/services', label: 'AI & ML Solutions' },
+      { to: '/services', label: 'Cloud & DevOps' }
+    ]
+  },
   { to: '/projects', label: 'Our Work' },
   { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact' },
@@ -30,6 +38,7 @@ const SEARCH_DATA = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
@@ -137,11 +146,45 @@ export default function Header() {
             <BrandMark className="site-header-brand" />
 
             <nav className="site-nav" aria-label="Primary">
-              {NAV_LINKS.map((link) => (
-                <Link key={link.to} to={link.to} className={`site-nav-link ${isLinkActive(link.to) ? 'active' : ''}`} onClick={handleNavigate}>
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                if (link.dropdown) {
+                  return (
+                    <div 
+                      key={link.label} 
+                      className="nav-dropdown-wrapper"
+                      onMouseEnter={() => setActiveDropdown(link.label)}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
+                      <Link 
+                        to={link.to} 
+                        className={`site-nav-link ${isLinkActive(link.to) ? 'active' : ''}`} 
+                        onClick={handleNavigate}
+                      >
+                        {link.label} <ChevronDown className="dropdown-arrow-icon" style={{ width: 12, height: 12, display: 'inline-block', marginLeft: 4, verticalAlign: 'middle', transition: 'transform 0.2s ease' }} />
+                      </Link>
+                      {activeDropdown === link.label && (
+                        <div className="nav-dropdown-menu">
+                          {link.dropdown.map((sub) => (
+                            <Link 
+                              key={sub.label} 
+                              to={sub.to} 
+                              className="nav-dropdown-item" 
+                              onClick={handleNavigate}
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return (
+                  <Link key={link.to} to={link.to} className={`site-nav-link ${isLinkActive(link.to) ? 'active' : ''}`} onClick={handleNavigate}>
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="site-header-actions">

@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
-import { supabase, fetchProjects, saveProject, deleteProject, fetchBlogs, saveBlog, deleteBlog } from '@/lib/supabaseClient';
+import { supabase, fetchProjects, saveProject, deleteProject, fetchBlogs, saveBlog, deleteBlog, fetchJobs, saveJob, deleteJob, fetchJobApplications, deleteJobApplication } from '@/lib/supabaseClient';
 import { LogOut, Search, User, Mail, Calendar, Briefcase, FileText, Lock, Plus, Edit2, Trash2 } from 'lucide-react';
 import PageHero from '@/components/site/PageHero';
 
 export default function Dashboard() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('inquiries'); // 'inquiries' | 'projects' | 'blogs'
+  const [activeTab, setActiveTab] = useState('inquiries'); // 'inquiries' | 'projects' | 'blogs' | 'jobs' | 'applications'
   
   // Data lists
   const [contacts, setContacts] = useState([]);
   const [projects, setProjects] = useState([]);
   const [blogs, setBlogs] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [applications, setApplications] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   // Authentication states
@@ -45,6 +47,17 @@ export default function Dashboard() {
     read_time: '5 min read',
   });
 
+  // Form states for creating/editing jobs
+  const [editingJob, setEditingJob] = useState(null); // null means not editing or creating new
+  const [jobForm, setJobForm] = useState({
+    id: undefined,
+    title: '',
+    department: '',
+    location: '',
+    type: 'Full-time',
+    description: '',
+  });
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -68,6 +81,8 @@ export default function Dashboard() {
     fetchContacts();
     loadProjects();
     loadBlogs();
+    loadJobs();
+    loadApplications();
   };
 
   const fetchContacts = async () => {
@@ -92,6 +107,16 @@ export default function Dashboard() {
   const loadBlogs = async () => {
     const res = await fetchBlogs();
     if (res.success) setBlogs(res.data || []);
+  };
+
+  const loadJobs = async () => {
+    const res = await fetchJobs();
+    if (res.success) setJobs(res.data || []);
+  };
+
+  const loadApplications = async () => {
+    const res = await fetchJobApplications();
+    if (res.success) setApplications(res.data || []);
   };
 
   const handleLogin = async (e) => {
@@ -228,6 +253,64 @@ export default function Dashboard() {
     }
   };
 
+  // --- JOB CRUD HANDLERS ---
+  const startAddJob = () => {
+    setEditingJob('new');
+    setJobForm({
+      id: undefined,
+      title: '',
+      department: '',
+      location: '',
+      type: 'Full-time',
+      description: '',
+    });
+  };
+
+  const startEditJob = (job) => {
+    setEditingJob(job.id);
+    setJobForm({
+      id: job.id,
+      title: job.title,
+      department: job.department,
+      location: job.location,
+      type: job.type,
+      description: job.description,
+    });
+  };
+
+  const handleJobSubmit = async (e) => {
+    e.preventDefault();
+    const res = await saveJob({
+      id: jobForm.id,
+      title: jobForm.title.trim(),
+      department: jobForm.department.trim(),
+      location: jobForm.location.trim(),
+      type: jobForm.type.trim(),
+      description: jobForm.description.trim(),
+    });
+
+    if (res.success) {
+      setEditingJob(null);
+      loadJobs();
+    } else {
+      alert('Error saving job posting: ' + res.error);
+    }
+  };
+
+  const handleDeleteJob = async (id) => {
+    if (window.confirm('Are you sure you want to delete this job posting?')) {
+      const res = await deleteJob(id);
+      if (res.success) loadJobs();
+    }
+  };
+
+  const handleDeleteApplication = async (id) => {
+    if (window.confirm('Are you sure you want to delete this job application?')) {
+      const res = await deleteJobApplication(id);
+      if (res.success) loadApplications();
+    }
+  };
+
   if (loading) {
     return (
       <main className="section" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -319,21 +402,33 @@ export default function Dashboard() {
             <div className="pill-row">
               <button 
                 className={`pill-button ${activeTab === 'inquiries' ? 'active' : ''}`}
-                onClick={() => { setActiveTab('inquiries'); setEditingProject(null); setEditingBlog(null); }}
+                onClick={() => { setActiveTab('inquiries'); setEditingProject(null); setEditingBlog(null); setEditingJob(null); }}
               >
                 Inquiries ({contacts.length})
               </button>
               <button 
                 className={`pill-button ${activeTab === 'projects' ? 'active' : ''}`}
-                onClick={() => { setActiveTab('projects'); setEditingProject(null); setEditingBlog(null); }}
+                onClick={() => { setActiveTab('projects'); setEditingProject(null); setEditingBlog(null); setEditingJob(null); }}
               >
                 Showcase Projects ({projects.length})
               </button>
               <button 
                 className={`pill-button ${activeTab === 'blogs' ? 'active' : ''}`}
-                onClick={() => { setActiveTab('blogs'); setEditingProject(null); setEditingBlog(null); }}
+                onClick={() => { setActiveTab('blogs'); setEditingProject(null); setEditingBlog(null); setEditingJob(null); }}
               >
                 Blog Posts ({blogs.length})
+              </button>
+              <button 
+                className={`pill-button ${activeTab === 'jobs' ? 'active' : ''}`}
+                onClick={() => { setActiveTab('jobs'); setEditingProject(null); setEditingBlog(null); setEditingJob(null); }}
+              >
+                Job Postings ({jobs.length})
+              </button>
+              <button 
+                className={`pill-button ${activeTab === 'applications' ? 'active' : ''}`}
+                onClick={() => { setActiveTab('applications'); setEditingProject(null); setEditingBlog(null); setEditingJob(null); }}
+              >
+                Applications ({applications.length})
               </button>
             </div>
 
@@ -343,7 +438,7 @@ export default function Dashboard() {
           </div>
 
           {/* Search bar inside lists (only visible when not editing) */}
-          {!editingProject && !editingBlog && (
+          {!editingProject && !editingBlog && !editingJob && (
             <div className="surface-panel" style={{ padding: '12px 20px', marginBottom: 24, maxWidth: '400px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <Search className="w-4 h-4 text-slate-400" />
@@ -656,6 +751,184 @@ export default function Dashboard() {
                     ))}
                   </div>
                 </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB CONTENT: JOB POSTINGS */}
+          {activeTab === 'jobs' && (
+            <div>
+              {/* If in edit/add mode */}
+              {editingJob ? (
+                <div className="surface-panel" style={{ padding: 24, maxWidth: '600px', margin: '0 auto' }}>
+                  <h3 className="card-title" style={{ marginBottom: 24 }}>{editingJob === 'new' ? 'Add Job Posting' : 'Edit Job Posting'}</h3>
+                  <form onSubmit={handleJobSubmit} className="lead-form-grid">
+                    
+                    <div className="form-field">
+                      <label>Job Title*</label>
+                      <input 
+                        type="text" 
+                        className="site-input" 
+                        value={jobForm.title}
+                        onChange={e => setJobForm(prev => ({...prev, title: e.target.value}))}
+                        required
+                        placeholder="e.g. Senior Frontend Developer"
+                      />
+                    </div>
+
+                    <div className="form-split">
+                      <div className="form-field">
+                        <label>Department*</label>
+                        <input 
+                          type="text" 
+                          className="site-input" 
+                          value={jobForm.department}
+                          onChange={e => setJobForm(prev => ({...prev, department: e.target.value}))}
+                          required
+                          placeholder="e.g. Engineering"
+                        />
+                      </div>
+
+                      <div className="form-field">
+                        <label>Location*</label>
+                        <input 
+                          type="text" 
+                          className="site-input" 
+                          value={jobForm.location}
+                          onChange={e => setJobForm(prev => ({...prev, location: e.target.value}))}
+                          required
+                          placeholder="e.g. Jaipur, Rajasthan (On-site / Hybrid)"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="form-field">
+                      <label>Job Type (e.g. Full-time, Part-time, Internship)*</label>
+                      <input 
+                        type="text" 
+                        className="site-input" 
+                        value={jobForm.type}
+                        onChange={e => setJobForm(prev => ({...prev, type: e.target.value}))}
+                        required
+                        placeholder="e.g. Full-time"
+                      />
+                    </div>
+
+                    <div className="form-field">
+                      <label>Description & Requirements*</label>
+                      <textarea 
+                        rows={6} 
+                        className="site-textarea" 
+                        value={jobForm.description}
+                        onChange={e => setJobForm(prev => ({...prev, description: e.target.value}))}
+                        required
+                        placeholder="Provide details about responsibilities, qualifications, and benefits..."
+                      />
+                    </div>
+
+                    <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
+                      <button type="submit" className="site-button site-button-primary">Save Job Posting</button>
+                      <button type="button" className="site-button site-button-secondary" onClick={() => setEditingJob(null)}>Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              ) : (
+                // List mode
+                <div>
+                  <button onClick={startAddJob} className="site-button site-button-primary" style={{ marginBottom: 24, display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <Plus className="w-4 h-4" /> Add New Job Posting
+                  </button>
+
+                  <div className="timeline-grid" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                    {jobs.filter(job => job.title?.toLowerCase().includes(searchQuery.toLowerCase()) || job.department?.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 ? (
+                      <div className="surface-panel" style={{ textAlign: 'center', padding: '48px 24px' }}>
+                        <p className="card-copy">No job postings found.</p>
+                      </div>
+                    ) : (
+                      jobs.filter(job => job.title?.toLowerCase().includes(searchQuery.toLowerCase()) || job.department?.toLowerCase().includes(searchQuery.toLowerCase())).map(job => (
+                        <div key={job.id} className="surface-panel" style={{ padding: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
+                          <div>
+                            <span className="card-kicker">{job.department} ({job.type})</span>
+                            <h4 className="card-title" style={{ fontSize: 18, marginTop: 4 }}>{job.title}</h4>
+                            <p className="card-copy" style={{ fontSize: 13, marginTop: 4 }}>Location: {job.location}</p>
+                          </div>
+                          <div style={{ display: 'flex', gap: 8 }}>
+                            <button onClick={() => startEditJob(job)} className="site-button site-button-secondary" style={{ padding: 8 }}>
+                              <Edit2 className="w-4 h-4" />
+                            </button>
+                            <button onClick={() => handleDeleteJob(job.id)} className="site-button site-button-secondary" style={{ padding: 8, color: '#ef4444', borderColor: '#ef4444' }}>
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB CONTENT: APPLICATIONS */}
+          {activeTab === 'applications' && (
+            <div className="timeline-grid" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              {applications.filter(app => app.full_name?.toLowerCase().includes(searchQuery.toLowerCase()) || app.job_title?.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 ? (
+                <div className="surface-panel" style={{ textAlign: 'center', padding: '48px 24px' }}>
+                  <p className="card-copy">No job applications found.</p>
+                </div>
+              ) : (
+                applications.filter(app => app.full_name?.toLowerCase().includes(searchQuery.toLowerCase()) || app.job_title?.toLowerCase().includes(searchQuery.toLowerCase())).map((app) => (
+                  <div key={app.id} className="surface-panel" style={{ padding: 24 }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12, borderBottom: '1px solid var(--border)', paddingBottom: 16, marginBottom: 16 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <span className="card-kicker" style={{ margin: 0 }}>Applied For: {app.job_title}</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--copy-muted)' }}>
+                          <Calendar className="w-3.5 h-3.5" />
+                          {new Date(app.created_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+                        </div>
+                        <button 
+                          onClick={() => handleDeleteApplication(app.id)} 
+                          className="site-button site-button-secondary" 
+                          style={{ padding: '6px 10px', height: 'auto', display: 'flex', alignItems: 'center', gap: 6, color: '#ef4444', borderColor: '#ef4444' }}
+                        >
+                          <Trash2 className="w-3.5 h-3.5" /> Delete
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="grid-two" style={{ gap: 24 }}>
+                      <div>
+                        <h4 className="card-title" style={{ fontSize: 18, marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <User className="w-4 h-4 text-indigo-400" /> {app.full_name}
+                        </h4>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <Mail className="w-4 h-4 text-slate-400" />
+                            <a href={`mailto:${app.email}`} style={{ color: 'var(--primary)', textDecoration: 'none' }}>{app.email}</a>
+                          </div>
+                          {app.phone && <div><strong>Phone:</strong> {app.phone}</div>}
+                          {app.portfolio_link && (
+                            <div style={{ wordBreak: 'break-all' }}>
+                              <strong>Portfolio/Resume:</strong>{' '}
+                              <a href={app.portfolio_link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>
+                                {app.portfolio_link}
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="card-title" style={{ fontSize: 16, marginBottom: 8 }}>Cover Letter / SOP</h4>
+                        <p className="card-copy" style={{ fontSize: 14, backgroundColor: 'rgba(255,255,255,0.02)', padding: 16, borderRadius: 8, border: '1px solid var(--border)', whiteSpace: 'pre-wrap' }}>
+                          {app.cover_letter}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))
               )}
             </div>
           )}

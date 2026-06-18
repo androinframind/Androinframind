@@ -13,6 +13,7 @@ import Payments from './pages/Payments';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Dashboard from './pages/Dashboard';
+import Careers from './pages/Careers';
 import { useFloatingBlobs, useMagneticButtons, useCardTilt, useCustomCursor, useTextReveal, usePageTransition, useSmoothScroll } from './hooks/useGsap';
 
 function ScrollToTop() {
@@ -82,6 +83,7 @@ function MainAppLayout() {
           <Route path="/payments" element={<Payments />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/androinframaind/dashboard" element={<Dashboard />} />
           <Route path="*" element={<Home />} />
         </Routes>

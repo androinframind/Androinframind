@@ -20,6 +20,7 @@ const FOOTER_GROUPS = [
       { to: '/projects', label: 'Our Work' },
       { to: '/blog', label: 'Blog' },
       { to: '/contact', label: 'Contact' },
+      { to: '/careers', label: 'Careers' },
     ],
   },
   {
@@ -132,6 +133,7 @@ export default function Footer() {
           <Link to="/privacy">Privacy</Link>
           <Link to="/terms">Terms</Link>
           <Link to="/payments">Payments</Link>
+          <Link to="/careers">Careers</Link>
         </div>
         <p>Built with precision. Designed for growth.</p>
       </div>

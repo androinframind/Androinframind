@@ -109,305 +109,147 @@ export default function Terms() {
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>6. Client Responsibilities</h2>
-                <p>To ensure successful project delivery, clients agree to:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Provide accurate information.</li>
-                  <li style={{ marginBottom: '6px' }}>Communicate requirements clearly.</li>
-                  <li style={{ marginBottom: '6px' }}>Respond within reasonable timeframes.</li>
-                  <li style={{ marginBottom: '6px' }}>Supply necessary assets and materials.</li>
-                  <li style={{ marginBottom: '6px' }}>Review deliverables promptly.</li>
-                  <li style={{ marginBottom: '6px' }}>Provide approvals when required.</li>
-                  <li style={{ marginBottom: '6px' }}>Cooperate during project execution.</li>
-                </ul>
+                <h2>6. Project Delivery & Revisions</h2>
+                <p>
+                  AndroInfraMind will make every reasonable effort to meet agreed project timelines. However, delays caused by factors beyond our control, including but not limited to third-party service outages, deployment issues, communication delays, client feedback delays, resource unavailability, force majeure events, or technical bottlenecks, shall not be considered a breach of contract.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  Delays in communication, approvals, or required inputs may impact project schedules and delivery timelines.
+                  Clients are provided opportunities to review project progress during development and after project completion. A revision period of seven (7) calendar days is provided following delivery. If no feedback or revision request is received within this period, the project shall be deemed approved and accepted by the client.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>7. White-Label Development Services</h2>
-                <p>AndroInfraMind provides white-label development services for agencies, consultants, and service providers.</p>
-                <p style={{ marginTop: '12px' }}>Under white-label engagements:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Client confidentiality is respected.</li>
-                  <li style={{ marginBottom: '6px' }}>Partner relationships remain private.</li>
-                  <li style={{ marginBottom: '6px' }}>Internal business structures remain confidential.</li>
-                  <li style={{ marginBottom: '6px' }}>Project ownership is governed by contractual agreements.</li>
-                  <li style={{ marginBottom: '6px' }}>Public disclosure requires authorization where applicable.</li>
-                </ul>
+                <h2>7. Intellectual Property & Copyright</h2>
+                <p>
+                  All logos, trademarks, content, files, images, and other materials supplied by the client remain the property of the client. The client grants AndroInfraMind permission to use, modify, and incorporate such materials into the project as necessary.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  We recognize the importance of trust in white-label partnerships and strive to maintain long-term professional relationships.
+                  The client is solely responsible for obtaining all required licenses, permissions, and copyrights for any third-party materials provided. AndroInfraMind shall not be liable for any claims, disputes, damages, or legal actions arising from copyright infringement, unauthorized use, or intellectual property violations related to materials supplied by the client.
+                </p>
+                <p style={{ marginTop: '12px' }}>
+                  AndroInfraMind reserves the right to request proof of ownership, licensing, or authorization for any materials supplied by the client.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>8. Confidentiality</h2>
-                <p>Confidentiality is a fundamental component of our business operations. Both parties agree to respect confidential information exchanged during:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Project discussions, consultations and planning sessions.</li>
-                  <li style={{ marginBottom: '6px' }}>Development activities and testing phases.</li>
-                  <li style={{ marginBottom: '6px' }}>Deployment processes and ongoing support.</li>
-                </ul>
-                <p style={{ marginTop: '12px' }}>Confidential information may include:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Business plans, product concepts and source code.</li>
-                  <li style={{ marginBottom: '6px' }}>Technical documentation and software specifications.</li>
-                  <li style={{ marginBottom: '6px' }}>Marketing strategies, financial information and operational processes.</li>
-                </ul>
-                <p style={{ marginTop: '12px' }}>
-                  Confidential information shall not be disclosed without authorization except where required by law.
+                <h2>8. Changes Made by Third Parties</h2>
+                <p>
+                  AndroInfraMind shall not be responsible for issues, errors, data loss, or performance problems resulting from modifications, deletions, additions, or alterations made by the client or any third party after project delivery. Any corrective work requested will be billed separately at applicable rates.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>9. Non-Disclosure Agreements (NDAs)</h2>
-                <p>Many projects involve Non-Disclosure Agreements.</p>
-                <p style={{ marginTop: '12px' }}>When an NDA exists:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>NDA provisions take precedence where applicable.</li>
-                  <li style={{ marginBottom: '6px' }}>Confidential information must be protected.</li>
-                  <li style={{ marginBottom: '6px' }}>Unauthorized disclosure is prohibited.</li>
-                  <li style={{ marginBottom: '6px' }}>Intellectual property remains protected.</li>
-                  <li style={{ marginBottom: '6px' }}>Access may be limited to authorized individuals.</li>
-                </ul>
+                <h2>9. Payment Terms</h2>
+                <p>
+                  We accept payments through bank transfer, UPI, online payment gateways, and other approved payment methods. AndroInfraMind reserves the right to modify accepted payment methods without prior notice.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  AndroInfraMind respects and supports NDA-based engagements.
+                  A non-refundable advance payment, typically ranging from 30% to 50% of the total project cost, is required before project commencement.
+                </p>
+                <p style={{ marginTop: '12px' }}>
+                  If a project is canceled, paused indefinitely, or terminated by the client after work has begun, the client shall be responsible for payment of all completed work and expenses incurred up to the cancellation date.
+                </p>
+                <p style={{ marginTop: '12px' }}>
+                  Failure to pay outstanding invoices may result in suspension of services, withholding of deliverables, and legal recovery actions where applicable.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>10. Intellectual Property Rights</h2>
-                <p>Intellectual property rights are governed by the applicable agreement executed between the parties.</p>
-                <p style={{ marginTop: '12px' }}>Unless otherwise agreed:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Clients retain ownership of assets supplied by them.</li>
-                  <li style={{ marginBottom: '6px' }}>Branding materials remain the property of their respective owners.</li>
-                  <li style={{ marginBottom: '6px' }}>Proprietary client resources remain protected.</li>
-                  <li style={{ marginBottom: '6px' }}>Ownership transfer conditions shall be defined in writing where applicable.</li>
-                </ul>
+                <h2>10. Support & Maintenance</h2>
+                <p>
+                  AndroInfraMind provides complimentary bug-fix support for thirty (30) days following project launch unless otherwise specified in writing.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  Project-specific ownership terms may vary depending on the nature of the engagement.
+                  After the support period expires, maintenance, enhancements, upgrades, content changes, feature additions, redesign requests, and technical support services will be billed separately according to the applicable support plan or hourly rate.
+                </p>
+                <p style={{ marginTop: '12px' }}>
+                  Third-party services, hosting providers, APIs, payment gateways, software licenses, plugins, and subscription-based products remain the responsibility of the client unless explicitly included in the project agreement.
+                </p>
+                <p style={{ marginTop: '12px' }}>
+                  AndroInfraMind does not provide warranties or guarantees for third-party products or services.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>11. Source Code Ownership</h2>
-                <p>Source code ownership may vary depending on:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Project agreements and custom development contracts.</li>
-                  <li style={{ marginBottom: '6px' }}>Licensing structures and usage rights.</li>
-                  <li style={{ marginBottom: '6px' }}>White-label arrangements and subscription models.</li>
-                  <li style={{ marginBottom: '6px' }}>SaaS products.</li>
-                </ul>
+                <h2>11. Additional Work, Enhancements & Revisions</h2>
+                <p>
+                  Any work requested beyond the agreed project scope shall be considered additional work and may result in additional charges and revised delivery timelines.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  Ownership, licensing rights, usage rights, and transfer conditions should be defined within the applicable service agreement.
+                  Minor adjustments may be completed at no additional charge at AndroInfraMind's discretion. However, excessive revision requests or requests outside the original scope may be billed separately.
+                </p>
+                <p style={{ marginTop: '12px' }}>
+                  Once a project phase has been approved, any subsequent modifications, redesigns, or rework requests shall be treated as additional services.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>12. Third-Party Software and Integrations</h2>
-                <p>Projects may include integrations involving payment gateways, hosting providers, analytics platforms, CRM systems, marketing tools, AI platforms, external APIs, and cloud infrastructure providers.</p>
-                <p style={{ marginTop: '12px' }}>AndroInfraMind does not control third-party platforms and cannot guarantee:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Service availability or platform uptime.</li>
-                  <li style={{ marginBottom: '6px' }}>Pricing changes or policy updates.</li>
-                  <li style={{ marginBottom: '6px' }}>Feature continuity.</li>
-                </ul>
+                <h2>12. Liability Limitation</h2>
+                <p>
+                  AndroInfraMind provides services using reasonable care, skill, and professional standards. However, all services are provided on an “as-is” basis without warranties of any kind, whether express or implied.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  Clients acknowledge the inherent risks associated with third-party dependencies.
+                  To the maximum extent permitted by law, AndroInfraMind shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of revenue, profits, business opportunities, data, goodwill, or business interruption.
+                </p>
+                <p style={{ marginTop: '12px' }}>
+                  Our total liability under any agreement shall not exceed the amount paid by the client for the specific project giving rise to the claim.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>13. Website Usage</h2>
-                <p>Visitors agree to use the website responsibly and lawfully.</p>
-                <p style={{ marginTop: '12px' }}>Users shall not:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Attempt unauthorized access.</li>
-                  <li style={{ marginBottom: '6px' }}>Disrupt website functionality or interfere with services.</li>
-                  <li style={{ marginBottom: '6px' }}>Introduce malicious software or conduct fraudulent activities.</li>
-                  <li style={{ marginBottom: '6px' }}>Misrepresent identities or violate applicable laws.</li>
-                </ul>
+                <h2>13. Project Ownership & Delivery</h2>
+                <p>
+                  Ownership of source code, design files, content, and project deliverables shall transfer to the client only after full and final payment has been received.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  Improper use may result in restricted access or legal action where appropriate.
+                  AndroInfraMind reserves the right to withhold delivery, deployment, source files, credentials, and project assets until all outstanding payments are cleared.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>14. Acceptable Use Policy</h2>
-                <p>Users must not use AndroInfraMind services for illegal activities, fraudulent schemes, malicious software distribution, unauthorized data collection, intellectual property infringement, harassment, abuse, or security exploitation.</p>
+                <h2>14. Portfolio Rights</h2>
+                <p>
+                  Unless otherwise agreed in writing, AndroInfraMind reserves the right to display completed projects, screenshots, company names, logos, and project descriptions in its portfolio, marketing materials, presentations, and promotional content.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  We reserve the right to refuse or discontinue services that violate these principles.
+                  Clients who wish to restrict such usage must provide written notice before project completion.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>15. SEO Services</h2>
-                <p>SEO services are provided according to industry best practices and strategic methodologies.</p>
-                <p style={{ marginTop: '12px' }}>Because search engines continuously evolve:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Rankings cannot be guaranteed.</li>
-                  <li style={{ marginBottom: '6px' }}>Traffic increases cannot be guaranteed.</li>
-                  <li style={{ marginBottom: '6px' }}>Revenue outcomes cannot be guaranteed.</li>
-                  <li style={{ marginBottom: '6px' }}>Business growth cannot be guaranteed.</li>
-                </ul>
+                <h2>15. Project Timeline</h2>
+                <p>
+                  Project timelines are estimates and may vary depending on project complexity, client responsiveness, revision requests, third-party dependencies, and unforeseen circumstances.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  Our commitment is to provide professional optimization services based on experience, analysis, and industry standards.
+                  Any delay in providing required content, approvals, credentials, or feedback may result in corresponding adjustments to the project schedule.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>16. Digital Marketing Services</h2>
-                <p>Digital marketing performance may depend on numerous external factors, including competition, budget allocation, market conditions, audience behavior, platform algorithms, and creative effectiveness.</p>
+                <h2>16. Governing Law & Jurisdiction</h2>
+                <p>
+                  These Terms and Conditions shall be governed by and interpreted in accordance with the laws of India.
+                </p>
                 <p style={{ marginTop: '12px' }}>
-                  While we strive for positive outcomes, specific business results cannot be guaranteed.
+                  Any disputes arising from or related to these Terms shall be subject to the exclusive jurisdiction of the courts located in Jaipur, Rajasthan, India.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>17. AI Solutions and Automation</h2>
-                <p>AndroInfraMind develops and integrates AI-powered systems and automation solutions.</p>
-                <p style={{ marginTop: '12px' }}>Clients acknowledge that:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>AI-generated outputs may vary.</li>
-                  <li style={{ marginBottom: '6px' }}>Automated systems may require monitoring.</li>
-                  <li style={{ marginBottom: '6px' }}>Third-party AI providers may influence performance.</li>
-                  <li style={{ marginBottom: '6px' }}>Results depend on implementation quality and available data.</li>
-                </ul>
-                <p style={{ marginTop: '12px' }}>
-                  AI services should be evaluated within the context of their intended use cases.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>18. Project Timelines</h2>
-                <p>Estimated timelines are based on information available during project planning.</p>
-                <p style={{ marginTop: '12px' }}>Timelines may be affected by scope changes, delayed approvals, third-party dependencies, infrastructure limitations, technical challenges, and resource availability.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Reasonable efforts will be made to communicate timeline changes when necessary.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>19. Revisions and Modifications</h2>
-                <p>Projects may include revision cycles as defined within the applicable agreement.</p>
-                <p style={{ marginTop: '12px' }}>Additional requests beyond the agreed scope may require:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Scope adjustments.</li>
-                  <li style={{ marginBottom: '6px' }}>Additional timelines.</li>
-                  <li style={{ marginBottom: '6px' }}>Revised pricing.</li>
-                  <li style={{ marginBottom: '6px' }}>New project agreements.</li>
-                </ul>
-                <p style={{ marginTop: '12px' }}>
-                  Change requests should be documented and approved before implementation.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>20. Payments and Billing</h2>
-                <p>Payment terms are defined within project proposals, invoices, contracts, or service agreements.</p>
-                <p style={{ marginTop: '12px' }}>Clients agree to:</p>
-                <ul style={{ marginTop: '12px', paddingLeft: '20px', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '6px' }}>Make payments according to agreed schedules.</li>
-                  <li style={{ marginBottom: '6px' }}>Provide accurate billing information.</li>
-                  <li style={{ marginBottom: '6px' }}>Address payment-related issues promptly.</li>
-                </ul>
-                <p style={{ marginTop: '12px' }}>
-                  Failure to fulfill payment obligations may result in project suspension or service interruption.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>21. Refund Policy</h2>
-                <p>Refund eligibility depends on service type, project stage, work completed, contractual obligations, and applicable agreements.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Custom development and consulting services often involve resource allocation and may not be eligible for full refunds after work has commenced. Specific refund provisions should be reviewed within the applicable agreement.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>22. Maintenance and Support</h2>
-                <p>Maintenance and support services may be offered separately or as part of specific service packages.</p>
-                <p style={{ marginTop: '12px' }}>Support availability may vary based on service plans, project agreements, resource availability, and operational requirements.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Response times are not guaranteed unless specified in writing.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>23. Service Availability</h2>
-                <p>While we strive to maintain uninterrupted service availability, we cannot guarantee continuous website access, uninterrupted communication channels, third-party service uptime, or platform availability at all times.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Temporary interruptions may occur due to maintenance, updates, technical issues, or circumstances beyond our control.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>24. Limitation of Liability</h2>
-                <p>To the maximum extent permitted by law, AndroInfraMind shall not be liable for indirect, incidental, or consequential damages, business interruption, revenue loss, data loss, loss of opportunities, or reputational impacts.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Any liability shall be limited to the extent permitted under applicable agreements and governing laws.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>25. Indemnification</h2>
-                <p>Clients agree to indemnify and hold harmless AndroInfraMind, its team members, contractors, partners, and affiliates from claims arising from client-provided content, misuse of services, intellectual property disputes, regulatory violations, or unauthorized activities.</p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>26. Force Majeure</h2>
-                <p>AndroInfraMind shall not be responsible for delays or failures resulting from circumstances beyond reasonable control, including natural disasters, government actions, internet disruptions, infrastructure failures, cybersecurity incidents, labor disputes, or utility outages.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Project schedules may be adjusted where such events occur.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>27. Suspension and Termination</h2>
-                <p>We reserve the right to suspend or terminate services where terms are violated, fraudulent activity is suspected, payments remain outstanding, legal obligations require action, or client conduct becomes abusive or harmful.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Termination shall not affect obligations that survive termination under applicable agreements.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>28. Governing Law</h2>
-                <p>These Terms shall be interpreted in accordance with applicable laws and regulations governing the jurisdiction in which AndroInfraMind operates.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Disputes shall be addressed through good-faith discussions before pursuing formal legal remedies where possible.
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px' }}>
-                <h2>29. Modifications to These Terms</h2>
-                <p>AndroInfraMind may update these Terms periodically to reflect business changes, service improvements, legal requirements, industry developments, or operational adjustments.</p>
-                <p style={{ marginTop: '12px' }}>
-                  Updated versions will be published on this page with a revised effective date. Continued use of our services after updates constitutes acceptance of the revised Terms.
+                <h2>17. Severability</h2>
+                <p>
+                  If any provision of these Terms and Conditions is found to be invalid, illegal, or unenforceable, the remaining provisions shall remain in full force and effect. The invalid provision shall be replaced with a valid provision that most closely reflects the original intent.
                 </p>
               </section>
 
               <section className="legal-section" style={{ marginTop: '32px', borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
-                <h2>30. Contact Information</h2>
-                <p>For questions regarding these Terms of Service, project engagements, confidentiality matters, white-label partnerships, or legal inquiries, please contact:</p>
+                <h2>Contact Information</h2>
+                <p>For questions regarding these Terms of Service, project engagements, confidentiality matters, or white-label partnerships, please contact:</p>
                 <p style={{ marginTop: '12px', lineHeight: '1.8' }}>
                   <strong>AndroInfraMind</strong><br />
                   Website: <a href="https://androinframind.com" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}>https://androinframind.com</a><br />
                   Email: <a href="mailto:androinframind@gmail.com" style={{ color: 'var(--primary)', textDecoration: 'none' }}>androinframind@gmail.com</a>
-                </p>
-              </section>
-
-              <section className="legal-section" style={{ marginTop: '32px', borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
-                <h2>Final Statement</h2>
-                <p>
-                  At AndroInfraMind, we are committed to building long-term relationships based on trust, professionalism, confidentiality, technical excellence, and mutual respect.
-                </p>
-                <p style={{ marginTop: '12px' }}>
-                  Whether we are developing a custom software platform, delivering SEO strategies, building AI-powered systems, supporting a white-label agency, or working under a strict NDA, our goal remains the same: to provide reliable, high-quality solutions while protecting the interests of our clients and partners.
-                </p>
-                <p style={{ marginTop: '16px', fontSize: '13px', color: 'var(--copy-muted)' }}>
-                  Thank you for choosing AndroInfraMind.
                 </p>
               </section>
             </div>

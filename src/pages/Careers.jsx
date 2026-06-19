@@ -65,6 +65,17 @@ export default function Careers() {
     loadJobs();
   }, []);
 
+  useEffect(() => {
+    if (selectedJob) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedJob]);
+
   const openApplyModal = (job) => {
     setSelectedJob(job);
     setApplyForm({

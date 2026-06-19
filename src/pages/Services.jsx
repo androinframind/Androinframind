@@ -45,6 +45,13 @@ const CORE_SERVICES = [
     techs: ['Google Ads', 'Meta Ads', 'Content Strategy', 'Analytics', 'Conversion Opt.']
   },
   {
+    icon: <Share2 className="w-6 h-6" />,
+    kicker: 'Social Media Marketing (SMM)',
+    title: 'Social Media Growth & Brand Engagement',
+    desc: 'Build a stronger brand presence across social platforms with content planning, profile optimization, creative campaigns, audience engagement, and performance tracking designed to grow reach and generate qualified leads.',
+    techs: ['Instagram', 'Facebook', 'LinkedIn', 'Content Calendar', 'Analytics']
+  },
+  {
     icon: <Layers className="w-6 h-6" />,
     kicker: 'SaaS & MVP Engineering',
     title: 'SaaS Platforms & MVP Delivery',

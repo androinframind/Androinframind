@@ -11,6 +11,19 @@ const BUDGET_OPTIONS = [
 ];
 
 const SERVICE_OPTIONS = [
+  { value: 'Quick Commerce Onboarding', label: 'Quick Commerce Onboarding' },
+  { value: 'Blinkit Onboarding', label: 'Blinkit Onboarding' },
+  { value: 'Zepto Onboarding', label: 'Zepto Onboarding' },
+  { value: 'Swiggy Instamart Onboarding', label: 'Swiggy Instamart Onboarding' },
+  { value: 'Marketplace Store Management', label: 'Marketplace Store Management' },
+  { value: 'Amazon Store Management', label: 'Amazon Store Management' },
+  { value: 'Flipkart Store Management', label: 'Flipkart Store Management' },
+  { value: 'Meesho Store Management', label: 'Meesho Store Management' },
+  { value: 'Shopify Store Setup', label: 'Shopify Store Setup' },
+  { value: 'Product Catalog & Listing Optimization', label: 'Product Catalog & Listing Optimization' },
+  { value: 'Product Ranking Optimization', label: 'Product Ranking Optimization' },
+  { value: 'Offers, Ads & Conversion Push', label: 'Offers, Ads & Conversion Push' },
+  { value: 'Inventory & Sales Growth Tracking', label: 'Inventory & Sales Growth Tracking' },
   { value: 'Web Development', label: 'Web Development' },
   { value: 'Mobile App Development', label: 'Mobile App Development' },
   { value: 'AI/ML Solutions', label: 'AI/ML Solutions' },
@@ -190,19 +203,19 @@ export default function LeadForm({
         </div>
 
         <div className="form-field">
-          <label>Estimated budget</label>
-          <div className="pill-row">
+          <label htmlFor="budget">Estimated budget</label>
+          <select
+            id="budget"
+            className="site-select"
+            value={formData.budget}
+            onChange={handleInputChange}
+          >
             {BUDGET_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                type="button"
-                className={`pill-button ${formData.budget === opt.value ? 'active' : ''}`}
-                onClick={() => setFormData((prev) => ({ ...prev, budget: opt.value }))}
-              >
+              <option key={opt.value} value={opt.value}>
                 {opt.label}
-              </button>
+              </option>
             ))}
-          </div>
+          </select>
         </div>
 
         <div className="form-field">

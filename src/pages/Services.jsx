@@ -67,6 +67,51 @@ const SUPPORT_SERVICES = [
   { icon: <Database className="w-6 h-6" />, title: 'Data Analytics & ETL', desc: 'Real-time dashboards, custom reporting, data pipelines, and decision-support systems that convert raw data into product insights.' },
 ];
 
+const QUICK_COMMERCE_SERVICES = [
+  {
+    icon: <AppWindow className="w-6 h-6" />,
+    title: 'Quick Commerce Onboarding',
+    desc: 'We help onboard your products on quick commerce and marketplace channels with account setup, documentation, category mapping, and launch readiness.',
+  },
+  {
+    icon: <Search className="w-6 h-6" />,
+    title: 'Catalog & Ranking Optimization',
+    desc: 'We optimize titles, keywords, images, pricing, category placement, and listing quality so your products can move toward stronger visibility and top search positions.',
+  },
+  {
+    icon: <Megaphone className="w-6 h-6" />,
+    title: 'Offers, Ads & Conversion Push',
+    desc: 'We plan sponsored campaigns, platform offers, coupons, and conversion experiments designed to turn visibility into actual buyer actions and real orders.',
+  },
+  {
+    icon: <Target className="w-6 h-6" />,
+    title: 'Real Sales Growth Tracking',
+    desc: 'We track impressions, clicks, conversion, stock readiness, best-selling SKUs, and weekly sales movement so growth stays measurable, practical, and revenue-focused.',
+  },
+];
+
+const QUICK_COMMERCE_STEPS = [
+  'Store or seller account setup with documentation and onboarding support.',
+  'Product catalog creation with titles, images, keywords, pricing, and category mapping.',
+  'Inventory, offer, delivery-zone, and stock availability readiness before promotion.',
+  'Ranking improvement through search terms, sponsored listings, offers, and conversion optimization.',
+  'Weekly reporting on visibility, clicks, orders, best sellers, and next improvement actions.',
+];
+
+const QUICK_COMMERCE_CHANNELS = ['Blinkit', 'Zepto', 'Swiggy Instamart', 'Amazon', 'Flipkart', 'Meesho', 'Shopify'];
+
+const SERVICE_DETAIL_LINKS = {
+  'Bespoke Software & API Solutions': '/services/custom-software',
+  'High-Performance Web Platforms': '/services/web-applications',
+  'Native & Cross-Platform Mobile Apps': '/services/mobile-apps',
+  'Technical & On-Page SEO Optimization': '/services/seo-digital-marketing',
+  'Data-Driven Growth Campaigns': '/services/seo-digital-marketing',
+  'Quick Commerce Onboarding': '/services/blinkit-zepto-setup',
+  'Catalog & Ranking Optimization': '/services/catalog-listing-support',
+  'Offers, Ads & Conversion Push': '/services/seo-digital-marketing',
+  'Real Sales Growth Tracking': '/services/inventory-catalog-sync',
+};
+
 const PARTNERSHIP_MODELS = [
   {
     icon: <HeartHandshake className="w-6 h-6" />,
@@ -199,16 +244,83 @@ export default function Services() {
                 title={service.title} 
                 description={service.desc} 
                 footer={
-                  <div className="stack-row" style={{ marginTop: '14px' }}>
-                    {service.techs.map((tech) => (
-                      <span key={tech} className="stack-pill">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  <>
+                    <div className="stack-row" style={{ marginTop: '14px' }}>
+                      {service.techs.map((tech) => (
+                        <span key={tech} className="stack-pill">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    {SERVICE_DETAIL_LINKS[service.title] ? (
+                      <Link to={SERVICE_DETAIL_LINKS[service.title]} className="site-button site-button-secondary site-button-sm">
+                        View details
+                      </Link>
+                    ) : null}
+                  </>
                 }
               />
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Quick Commerce & Marketplace Growth"
+            title="We onboard your products, improve visibility, and drive real sales"
+            description="From Blinkit, Zepto, Instamart, Amazon, and Flipkart onboarding to catalog optimization, ranking improvements, offers, and weekly sales tracking — we help your products move from listing to actual orders."
+            align="center"
+          />
+
+          <div className="grid-four">
+            {QUICK_COMMERCE_SERVICES.map((service) => (
+              <FeatureCard
+                key={service.title}
+                icon={service.icon}
+                title={service.title}
+                description={service.desc}
+                footer={
+                  SERVICE_DETAIL_LINKS[service.title] ? (
+                    <Link to={SERVICE_DETAIL_LINKS[service.title]} className="site-button site-button-secondary site-button-sm">
+                      View details
+                    </Link>
+                  ) : null
+                }
+              />
+            ))}
+          </div>
+
+          <div className="dual-panel" style={{ marginTop: 'var(--spacing-xl)' }}>
+            <div className="surface-panel scroll-reveal">
+              <h3 className="card-title">How we take your products forward</h3>
+              <div className="info-list" style={{ marginTop: 18 }}>
+                {QUICK_COMMERCE_STEPS.map((step) => (
+                  <div key={step} className="contact-point">
+                    <div className="contact-icon"><CheckCircle2 className="w-5 h-5" /></div>
+                    <p className="card-copy">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="surface-panel scroll-reveal stagger-2">
+              <h3 className="card-title">Channels we can support</h3>
+              <p className="card-copy" style={{ marginTop: 10 }}>
+                We prepare the catalog, listing quality, offer structure, and performance tracking for platforms where your buyers already search.
+              </p>
+              <div className="pill-row" style={{ marginTop: 18 }}>
+                {QUICK_COMMERCE_CHANNELS.map((channel) => (
+                  <span key={channel} className="stack-pill">{channel}</span>
+                ))}
+              </div>
+              <div className="cta-actions" style={{ marginTop: 24 }}>
+                <Link to="/contact" className="site-button site-button-primary">
+                  Start marketplace growth
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -61,9 +61,13 @@ const QUICK_ACTIONS = [
   { label: 'Submit Requirements', value: 'lead_form' },
 ];
 
+function shouldSkipChatIntro() {
+  return typeof window !== 'undefined' && window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+}
+
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isIntro, setIsIntro] = useState(true);
+  const [isIntro, setIsIntro] = useState(() => !shouldSkipChatIntro());
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -86,6 +90,11 @@ export default function ChatbotWidget() {
     setMessages([
       { sender: 'bot', text: SYSTEM_PROMPTS.welcome, timestamp: new Date() }
     ]);
+
+    if (shouldSkipChatIntro()) {
+      setIsIntro(false);
+      return undefined;
+    }
 
     // End intro state after 1.3s
     const timer = setTimeout(() => {

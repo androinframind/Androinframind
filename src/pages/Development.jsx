@@ -1,4 +1,4 @@
-import { ArrowRight, Code, Cpu, Database, ShieldAlert } from 'lucide-react';
+http://localhost:5173/import { ArrowRight, Code, Cpu, Database, ShieldAlert } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CTASection from '@/components/site/CTASection';
 import FeatureCard from '@/components/site/FeatureCard';

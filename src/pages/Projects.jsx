@@ -175,8 +175,8 @@ export default function Projects() {
   return (
     <main>
       <PageHero
-        eyebrow="Case studies & trust"
-        title={<>Selected projects and client safeguards</>}
+        eyebrow="Our work & trust"
+        title={<>Selected work and client safeguards</>}
         description="Explore our portfolio of successfully delivered enterprise software, custom applications, and cloud systems."
         centered
       />
@@ -225,7 +225,7 @@ export default function Projects() {
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
                       {project.iconPath ? (
-                        <img src={project.iconPath} alt={project.name} style={{ width: '36px', height: '36px', borderRadius: '6px', objectFit: 'contain', background: '#f1f5f9', border: '1px solid var(--border-soft)', padding: '3px' }} />
+                        <img src={project.iconPath} alt={project.name} loading="lazy" decoding="async" style={{ width: '36px', height: '36px', borderRadius: '6px', objectFit: 'contain', background: '#f1f5f9', border: '1px solid var(--border-soft)', padding: '3px' }} />
                       ) : (
                         <div className="icon-button" style={{ width: '36px', height: '36px', background: 'var(--accent-soft)', border: 'none', color: 'var(--accent)', cursor: 'default' }}>
                           {project.icon}
@@ -283,7 +283,7 @@ export default function Projects() {
         <div className="container">
           <SectionHeading
             eyebrow="Representative work"
-            title="Project stories, simplified"
+            title="Our work, simplified"
             description="A showcase of enterprise products, SaaS platforms, and digital systems we have designed, built, and launched for scaling businesses."
             align="center"
           />
@@ -321,7 +321,7 @@ export default function Projects() {
 
       <CTASection
         eyebrow="Need similar results?"
-        title="Use the case studies as a starting point, not the finish line"
+        title="Use our work as a starting point, not the finish line"
         description="If your platform, product, or digital experience needs stronger structure, performance, or trust, we can help define the next phase."
       />
     </main>

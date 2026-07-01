@@ -2,27 +2,22 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Menu, Search, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BrandMark from '@/components/site/BrandMark';
+import { SERVICE_GROUPS } from '@/data/serviceDetails';
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
-  { 
-    to: '/services', 
-    label: 'Services',
-    dropdown: [
-      { to: '/services', label: 'Custom Software' },
-      { to: '/services', label: 'AI & ML Solutions' },
-      { to: '/services', label: 'Cloud & DevOps' }
-    ]
-  },
+  { to: '/services', label: 'Services', mega: true },
   { to: '/projects', label: 'Our Work' },
   { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact' },
 ];
 
+const MOBILE_NAV_LINKS = NAV_LINKS.filter((link) => !link.mega);
+
 const SEARCH_DATA = [
   { type: 'page', icon: '🏠', title: 'Home', desc: 'AndroInfraMind — intelligent software and AI solutions', url: '/', keywords: 'home main landing' },
   { type: 'page', icon: '🛠️', title: 'Services', desc: 'Full list of technology services we offer', url: '/services', keywords: 'services technology solutions' },
-  { type: 'page', icon: '📁', title: 'Projects & Case Studies', desc: 'Portfolio of completed enterprise projects', url: '/projects', keywords: 'projects portfolio case studies' },
+  { type: 'page', icon: '📁', title: 'Our Work', desc: 'Portfolio of completed enterprise work and delivered outcomes', url: '/projects', keywords: 'our work portfolio projects case studies' },
   { type: 'page', icon: '👥', title: 'About Us', desc: 'Our mission, team, and engineering philosophy', url: '/about', keywords: 'about team mission company' },
   { type: 'page', icon: '✉️', title: 'Contact', desc: 'Start your project and get a quote in 24 hours', url: '/contact', keywords: 'contact quote inquiry get in touch' },
   { type: 'page', icon: '💳', title: 'Payments', desc: 'Secure B2B invoice payment and consultation booking', url: '/payments', keywords: 'payment invoice checkout razorpay' },
@@ -55,12 +50,36 @@ export default function Header() {
   const handleNavigate = () => {
     closeMenu();
     closeSearch();
+    setActiveDropdown(null);
   };
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 12);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    closeMenu();
+    closeSearch();
+    setActiveDropdown(null);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    let frameId = null;
+
+    const updateScrolled = () => {
+      frameId = null;
+      setScrolled(window.scrollY > 12);
+    };
+
+    const handleScroll = () => {
+      if (frameId === null) {
+        frameId = window.requestAnimationFrame(updateScrolled);
+      }
+    };
+
+    updateScrolled();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   useEffect(() => {
@@ -147,32 +166,38 @@ export default function Header() {
 
             <nav className="site-nav" aria-label="Primary">
               {NAV_LINKS.map((link) => {
-                if (link.dropdown) {
+                if (link.mega) {
                   return (
-                    <div 
-                      key={link.label} 
-                      className="nav-dropdown-wrapper"
+                    <div
+                      key={link.label}
+                      className="nav-dropdown-wrapper nav-mega-wrapper"
                       onMouseEnter={() => setActiveDropdown(link.label)}
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
-                      <Link 
-                        to={link.to} 
-                        className={`site-nav-link ${isLinkActive(link.to) ? 'active' : ''}`} 
+                      <Link
+                        to={link.to}
+                        className={`site-nav-link ${isLinkActive(link.to) ? 'active' : ''}`}
                         onClick={handleNavigate}
                       >
                         {link.label} <ChevronDown className="dropdown-arrow-icon" style={{ width: 12, height: 12, display: 'inline-block', marginLeft: 4, verticalAlign: 'middle', transition: 'transform 0.2s ease' }} />
                       </Link>
                       {activeDropdown === link.label && (
-                        <div className="nav-dropdown-menu">
-                          {link.dropdown.map((sub) => (
-                            <Link 
-                              key={sub.label} 
-                              to={sub.to} 
-                              className="nav-dropdown-item" 
-                              onClick={handleNavigate}
-                            >
-                              {sub.label}
-                            </Link>
+                        <div className="nav-mega-menu">
+                          {SERVICE_GROUPS.map((group) => (
+                            <div key={group.title} className={`nav-mega-group ${group.featured ? 'nav-mega-group-featured' : ''}`}>
+                              <h4>{group.title}</h4>
+                              {group.links.map((sub) => (
+                                <Link
+                                  key={`${group.title}-${sub.label}`}
+                                  to={sub.to}
+                                  className="nav-mega-item"
+                                  onClick={handleNavigate}
+                                >
+                                  <span className="nav-mega-icon" aria-hidden="true">{sub.icon}</span>
+                                  <span>{sub.label}</span>
+                                </Link>
+                              ))}
+                            </div>
                           ))}
                         </div>
                       )}
@@ -202,18 +227,26 @@ export default function Header() {
       <div className={`mobile-nav-panel ${menuOpen ? 'open' : ''}`}>
         <div className="container mobile-nav-shell">
           <div className="mobile-nav-links">
-            {NAV_LINKS.map((link) => (
-              <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={handleNavigate}>
+            {MOBILE_NAV_LINKS.map((link) => (
+              <Link key={`${link.to}-${link.label}`} to={link.to} className={`mobile-nav-link ${isLinkActive(link.to) ? 'active' : ''}`} onClick={handleNavigate}>
                 {link.label}
               </Link>
             ))}
-            <Link to="/payments" className="mobile-nav-link" onClick={handleNavigate}>
-              Payments
-            </Link>
+            <div className="mobile-services-menu">
+              <span className="mobile-services-title">Services</span>
+              {SERVICE_GROUPS.map((group) => (
+                <div key={group.title} className={`mobile-services-group ${group.featured ? 'mobile-services-group-featured' : ''}`}>
+                  <strong>{group.title}</strong>
+                  {group.links.map((sub) => (
+                    <Link key={`${group.title}-${sub.label}`} to={sub.to} className="mobile-service-link" onClick={handleNavigate}>
+                      <span className="nav-mega-icon" aria-hidden="true">{sub.icon}</span>
+                      <span>{sub.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
-          <Link to="/contact" className="site-button site-button-secondary mobile-nav-cta" onClick={handleNavigate}>
-            Contact
-          </Link>
         </div>
       </div>
 

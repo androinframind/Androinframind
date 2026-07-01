@@ -8,9 +8,9 @@ const FOOTER_GROUPS = [
   {
     title: 'Services',
     links: [
-      { to: '/services', label: 'Custom Software' },
-      { to: '/services', label: 'AI & ML Solutions' },
-      { to: '/services', label: 'Cloud & DevOps' },
+      { to: '/services/custom-software', label: 'Custom Software' },
+      { to: '/services/ai-ml-solutions', label: 'AI & ML Solutions' },
+      { to: '/services/cloud-infrastructure', label: 'Cloud & DevOps' },
     ],
   },
   {

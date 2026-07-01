@@ -1,20 +1,22 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { HashRouter as Router, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import ChatbotWidget from './components/site/ChatbotWidget';
 import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
-import Blog from './pages/Blog';
-import Payments from './pages/Payments';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
-import Dashboard from './pages/Dashboard';
-import Careers from './pages/Careers';
 import { useFloatingBlobs, useMagneticButtons, useCardTilt, useCustomCursor, useTextReveal, usePageTransition, useSmoothScroll } from './hooks/useGsap';
+
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const Projects = lazy(() => import('./pages/Projects'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Blog = lazy(() => import('./pages/Blog'));
+const Payments = lazy(() => import('./pages/Payments'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Terms = lazy(() => import('./pages/Terms'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Careers = lazy(() => import('./pages/Careers'));
+const ChatbotWidget = lazy(() => import('./components/site/ChatbotWidget'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -43,12 +45,21 @@ function ScrollToTop() {
   return null;
 }
 
+function RouteFallback() {
+  return (
+    <div className="route-fallback" role="status" aria-live="polite">
+      Loading…
+    </div>
+  );
+}
+
 function MainAppLayout() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const [showChatbot, setShowChatbot] = useState(false);
 
   useFloatingBlobs();
-  const cleanupMagnetic = useMagneticButtons(pathname);
+  useMagneticButtons(pathname);
   useCardTilt(pathname);
   useCustomCursor();
   useTextReveal(pathname);
@@ -67,28 +78,49 @@ function MainAppLayout() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [navigate]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    const revealChatbot = () => setShowChatbot(true);
+
+    if ('requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(revealChatbot, { timeout: 3200 });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = window.setTimeout(revealChatbot, 1800);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
   return (
     <div className="app-shell">
       <div className="ambient-orb orb-one" aria-hidden="true" />
       <div className="ambient-orb orb-two" aria-hidden="true" />
       <Header />
       <div className="app-main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/payments" element={<Payments />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/androinframaind/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
+        <Suspense fallback={<RouteFallback />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/payments" element={<Payments />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/androinframaind/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </Suspense>
       </div>
-      <ChatbotWidget />
+      {showChatbot ? (
+        <Suspense fallback={null}>
+          <ChatbotWidget />
+        </Suspense>
+      ) : null}
       <Footer />
     </div>
   );

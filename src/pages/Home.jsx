@@ -1,128 +1,68 @@
-import { useEffect } from 'react';
-import gsap from 'gsap';
-import { ArrowRight, CheckCircle2, MessageSquare, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BarChart3, CheckCircle2, Megaphone, MessageSquare, PackageCheck, ShieldCheck, Store } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CTASection from '@/components/site/CTASection';
-import CaseStudyCard from '@/components/site/CaseStudyCard';
 import FeatureCard from '@/components/site/FeatureCard';
-import LeadForm from '@/components/site/LeadForm';
-import PageHero from '@/components/site/PageHero';
+import VideoHero from '@/components/site/VideoHero';
 import SectionHeading from '@/components/site/SectionHeading';
 import StatCard from '@/components/site/StatCard';
-import TestimonialCard from '@/components/site/TestimonialCard';
 import { useMetricCounters, useScrollReveal } from '@/hooks/useGsap';
 
-const TESTIMONIALS = [
-  { name: 'Rajesh Sharma', role: 'CTO, FinPay Technologies', text: 'AndroInfraMind transformed our legacy systems into a modern, scalable platform. Their team\'s technical depth and communication were exceptional throughout.' },
-  { name: 'Sarah Mitchell', role: 'VP Engineering, MediTrack Health', text: 'We needed an AI solution that actually worked in production. AndroInfraMind delivered a predictive analytics engine that reduced our operational costs by 30%.' },
-  { name: 'Emily Chen', role: 'Head of Digital, SwiftCart', text: 'Their engineering depth doubled our platform capability while supporting a faster, cleaner customer journey.' },
-  { name: 'David Hall', role: 'Director of Product, LearnHub', text: 'AndroInfraMind delivered an exceptional learning platform under budget. Live classes and interactive learning tools scaled flawlessly to thousands of concurrent users.' },
-  { name: 'Marcus Vance', role: 'Managing Partner, Apex Digital Agency', text: 'We partnered with AndroInfraMind for white-label development support. Their staff augmentation model integrated seamlessly into our workflows, delivering high-performance projects on time and under budget.' },
-  { name: 'Elena Rostova', role: 'CTO, CoreSaaS Analytics', text: 'Their expertise in microservices and database clustering helped us launch our platform with zero downtime. Exceptional engineering partners.' },
+const PROMO_SERVICES = [
+  {
+    icon: <PackageCheck className="w-7 h-7" />,
+    emoji: '⚡',
+    title: 'Quick Commerce Onboarding',
+    description: 'Launch products on Blinkit, Zepto, and Instamart with account setup, catalog readiness, and launch support.',
+    to: '/services/blinkit-zepto-setup',
+    accent: 'blue',
+    visualLabel: 'Blinkit · Zepto · Instamart',
+    visualMetric: 'Launch-ready catalog',
+  },
+  {
+    icon: <Store className="w-7 h-7" />,
+    emoji: '🛍️',
+    title: 'Marketplace Store Management',
+    description: 'Manage Amazon, Flipkart, and marketplace stores with better catalog quality, offers, and operational support.',
+    to: '/services/flipkart-store-management',
+    accent: 'violet',
+    visualLabel: 'Amazon · Flipkart · Meesho',
+    visualMetric: 'Store ops dashboard',
+  },
+  {
+    icon: <Megaphone className="w-7 h-7" />,
+    emoji: '🚀',
+    title: 'Product Ranking Optimization',
+    description: 'Improve product titles, keywords, images, pricing, and promotions to push listings toward stronger visibility.',
+    to: '/services/catalog-listing-support',
+    accent: 'orange',
+    visualLabel: 'SEO · Ads · Offers',
+    visualMetric: 'Top-search visibility',
+  },
+  {
+    icon: <BarChart3 className="w-7 h-7" />,
+    emoji: '📈',
+    title: 'Real Sales Growth',
+    description: 'Track impressions, clicks, orders, best sellers, and weekly actions focused on actual revenue movement.',
+    to: '/services/inventory-catalog-sync',
+    accent: 'green',
+    visualLabel: 'Orders · Stock · Revenue',
+    visualMetric: '+ weekly growth actions',
+  },
 ];
 
 export default function Home() {
   useScrollReveal();
   useMetricCounters();
 
-  useEffect(() => {
-    gsap.fromTo('.chart-line', 
-      { width: '0%' }, 
-      { 
-        width: (index) => index === 0 ? '100%' : index === 1 ? '78%' : '64%', 
-        duration: 1.2, 
-        stagger: 0.15, 
-        ease: 'power2.out',
-        delay: 0.5 
-      }
-    );
-
-    gsap.fromTo('.hero-title span',
-      { 
-        scale: 0.75,
-        rotate: -3,
-        backgroundPosition: '0% center',
-      },
-      {
-        scale: 1,
-        rotate: 0,
-        backgroundPosition: '100% center',
-        duration: 1.5,
-        delay: 0.35,
-        ease: 'elastic.out(1, 0.6)',
-      }
-    );
-  }, []);
-
   return (
     <>
-      <PageHero
-        eyebrow="Enterprise software partner"
-        title={<>Build Smarter. <br />
-        Scale <span>Faster.</span></>}
-        description="Your strategic technology partner for custom software, AI/ML solutions, cloud infrastructure, and digital transformation. We turn complex challenges into elegant, scalable systems."
-        actions={
-          <>
-            <Link to="/contact" className="site-button site-button-primary">
-              Start your project <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link to="/services" className="site-button site-button-secondary">
-              Explore services
-            </Link>
-          </>
-        }
-        aside={
-          <div className="hero-visual scroll-reveal stagger-2">
-            <div className="dashboard-frame">
-              <div className="dashboard-topbar">
-                <div>
-                  <span className="dashboard-label">Delivery snapshot</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
-                    <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', backgroundColor: '#10b981', boxShadow: '0 0 8px #10b981', animation: 'pulse 2s infinite' }} />
-                    <strong>Operational Growth Dashboard</strong>
-                  </div>
-                </div>
-                <span className="dashboard-pill">24% Faster</span>
-              </div>
-              <div className="dashboard-grid">
-                <div className="dashboard-metric">
-                  <span>Projects delivered</span>
-                  <strong>125+</strong>
-                </div>
-                <div className="dashboard-metric">
-                  <span>Retention rate</span>
-                  <strong>98%</strong>
-                </div>
-              </div>
-              <div className="dashboard-chart">
-                <span className="dashboard-label">Performance trend</span>
-                <div className="chart-lines">
-                  <div className="chart-line" />
-                  <div className="chart-line line-two" />
-                  <div className="chart-line line-three" />
-                </div>
-              </div>
-            </div>
-          </div>
-        }
-      />
-
-      <section className="section section-first">
-        <div className="container">
-          <div className="hero-proof scroll-reveal">
-            <span className="proof-pill">On-time delivery</span>
-            <span className="proof-pill">Flexible engagement</span>
-            <span className="proof-pill">NDA protected</span>
-            <span className="proof-pill">24/7 support</span>
-          </div>
-        </div>
-      </section>
+      <VideoHero />
 
       <div className="marquee-container">
         <div className="marquee-track">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="marquee-group">
-              {['AI & Machine Learning', 'Cloud Infrastructure', 'Web Applications', 'Mobile Development', 'Digital Strategy', 'Enterprise Systems'].map((item) => (
+              {['AI & Machine Learning', 'Cloud Infrastructure', 'Web Applications', 'Mobile Development', 'Digital Strategy', 'Enterprise Systems', 'Quick Commerce Onboarding', 'Marketplace Store Management', 'Product Ranking Optimization', 'Real Sales Growth'].map((item) => (
                 <div key={item} className="marquee-item">
                   <span className="marquee-separator">◆</span>
                   <span>{item}</span>
@@ -132,6 +72,54 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      <section className="section quick-commerce-showcase">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Quick commerce growth"
+            title="Launch, manage, rank, and grow your marketplace sales"
+            description="Attractive quick commerce support for onboarding, store operations, product visibility, and real sales growth across the channels your customers already use."
+            align="center"
+          />
+
+          <div className="promo-card-grid">
+            {PROMO_SERVICES.map((service, index) => (
+              <Link
+                key={service.title}
+                to={service.to}
+                className={`promo-card promo-card--${service.accent} scroll-reveal stagger-${Math.min(index + 1, 4)}`}
+              >
+                <div className="promo-card__visual" aria-hidden="true">
+                  <div className="promo-card__halo" />
+                  <div className="promo-card__emoji">{service.emoji}</div>
+                  <div className="promo-card__mini promo-card__mini--top">
+                    <span />
+                    <strong>{service.visualLabel}</strong>
+                  </div>
+                  <div className="promo-card__chart">
+                    <i />
+                    <i />
+                    <i />
+                  </div>
+                  <div className="promo-card__mini promo-card__mini--bottom">
+                    <span>{service.visualMetric}</span>
+                  </div>
+                </div>
+
+                <div className="promo-card__body">
+                  <div className="promo-card__icon">{service.icon}</div>
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                  <span className="promo-card__cta">
+                    Explore service <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section">
         <div className="container">
           <SectionHeading
@@ -180,112 +168,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Case studies"
-            title="Real-world results and engineering execution"
-            description="Explore some of our recently delivered software solutions, showcasing technical execution, robust architecture, and real business outcomes."
-            align="center"
-          />
-          <div className="grid-two">
-            <CaseStudyCard
-              category="Fintech"
-              title="FinPay — Digital Banking Platform"
-              summary="Built a full-stack digital banking platform with real-time payments, KYC automation, and fraud detection — processing 100K+ transactions monthly."
-              metrics={['3x faster onboarding', '99.99% uptime', '40% fraud reduction']}
-              stack={['React', 'Node.js', 'AWS', 'ML']}
-              accent="💳"
-            />
-            <CaseStudyCard
-              category="Healthcare"
-              title="MediTrack — Healthcare Analytics"
-              summary="Developed an AI-powered patient analytics platform for a hospital network, enabling predictive health monitoring and automated reporting."
-              metrics={['60% faster diagnostics', 'HIPAA compliant', '200K patients served']}
-              stack={['Python', 'TensorFlow', 'React', 'GCP']}
-              accent="🏥"
-            />
-          </div>
-          <div className="scroll-reveal" style={{ display: 'flex', justifyContent: 'center', marginTop: 40 }}>
-            <Link to="/projects" className="site-button site-button-secondary">
-              View all case studies <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-      <section className="section section-muted">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Methodology"
-            title="A Proven Process for Delivering Results"
-            description="Our battle-tested methodology ensures every project moves from concept to production with clarity, speed, and quality."
-            align="center"
-          />
-          <div className="grid-three">
-            {[
-              {
-                step: '01',
-                title: 'Discovery & Strategy',
-                text: 'We start by understanding your business, users, and objectives. Through workshops and research, we define the right technology strategy and project roadmap.',
-              },
-              {
-                step: '02',
-                title: 'Architecture & Design',
-                text: 'Our architects design scalable system blueprints while our UX team crafts intuitive interfaces — ensuring technical excellence meets exceptional usability.',
-              },
-              {
-                step: '03',
-                title: 'Agile Development',
-                text: 'We build in iterative sprints with continuous integration, transparent progress tracking, and regular demos — so you see results early and often.',
-              },
-              {
-                step: '04',
-                title: 'Testing & QA',
-                text: 'Rigorous automated and manual testing across devices, browsers, and edge cases ensures your product is rock-solid before it reaches users.',
-              },
-              {
-                step: '05',
-                title: 'Deployment & Launch',
-                text: 'We handle production deployment with zero-downtime strategies, performance optimization, and infrastructure hardening for a smooth launch.',
-              },
-              {
-                step: '06',
-                title: 'Support & Evolution',
-                text: 'Post-launch, we provide proactive monitoring, maintenance, and iterative enhancements to keep your product ahead of the curve.',
-              },
-            ].map(({ step, title, text }) => (
-              <div key={step} className="surface-card process-card scroll-reveal">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 6 }}>
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--accent-strong)' }}>
-                    Step {step}
-                  </span>
-                  <span style={{ fontSize: '2.5rem', fontWeight: 300, fontFamily: 'Georgia, serif', color: 'var(--text-muted)', opacity: 0.15, lineHeight: 1 }}>
-                    {step}
-                  </span>
-                </div>
-                <h3 className="card-title" style={{ marginTop: 0 }}>{title}</h3>
-                <p className="card-copy" style={{ marginTop: 8, fontSize: '0.94rem', lineHeight: 1.6 }}>{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Client perspective"
-            title="What our partners say about us"
-            description="Hear from tech founders, engineering VPs, and product leaders who have integrated AndroInfraMind into their development workflows."
-            align="center"
-          />
-          <div className="testimonial-grid">
-            {TESTIMONIALS.map((testimonial) => (
-              <TestimonialCard key={testimonial.name} quote={testimonial.text} name={testimonial.name} role={testimonial.role} />
-            ))}
-          </div>
-        </div>
-      </section>
 
       <CTASection
         eyebrow="Ready to talk?"
@@ -302,39 +184,6 @@ export default function Home() {
           </>
         }
       />
-
-      <section className="section section-muted" id="contact-cta">
-        <div className="container contact-layout">
-          <div className="contact-side">
-            <SectionHeading
-              eyebrow="Get in touch"
-              title="Start with a focused project conversation"
-              description="Share the scope, goals, and context. We’ll follow up with a structured response and next-step recommendation."
-            />
-            <div className="contact-points">
-              <div className="contact-point scroll-reveal">
-                <div className="contact-icon">
-                  <MessageSquare className="w-5 h-5" />
-                </div>
-                <div>
-                  <strong>Fast response</strong>
-                  <p className="contact-side-note">We aim to respond within 24 hours for qualified inbound inquiries.</p>
-                </div>
-              </div>
-              <div className="contact-point scroll-reveal">
-                <div className="contact-icon">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <strong>Confidential by default</strong>
-                  <p className="contact-side-note">We can provide a mutual NDA before reviewing sensitive technical details.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <LeadForm />
-        </div>
-      </section>
     </>
   );
 }

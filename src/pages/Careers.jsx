@@ -5,6 +5,8 @@ import CTASection from '@/components/site/CTASection';
 import { Briefcase, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { fetchJobs, saveJobApplication } from '@/lib/supabaseClient';
 
+const PHONE_REGEX = /^(?:\+91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}$/;
+
 const JOBS = [
   {
     title: 'Senior Software Engineer (Full-Stack)',
@@ -97,7 +99,13 @@ export default function Careers() {
     e.preventDefault();
     setSubmitting(true);
     setApplyError('');
-    
+
+    if (applyForm.phone.trim() && !PHONE_REGEX.test(applyForm.phone.trim())) {
+      setApplyError('Please enter a valid phone number.');
+      setSubmitting(false);
+      return;
+    }
+
     const payload = {
       job_id: selectedJob.id || null,
       job_title: selectedJob.title,

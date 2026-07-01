@@ -18,6 +18,8 @@ const SERVICE_OPTIONS = [
   { value: 'Cloud & DevOps', label: 'Cloud & DevOps' },
 ];
 
+const PHONE_REGEX = /^(?:\+91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}$/;
+
 export default function LeadForm({
   title = 'Start project discovery',
   description = 'Tell us what you are building, improving, or migrating and we’ll help define the right next step.',
@@ -58,6 +60,9 @@ export default function LeadForm({
       nextErrors.email = 'Work email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       nextErrors.email = 'Please enter a valid email address';
+    }
+    if (formData.phone.trim() && !PHONE_REGEX.test(formData.phone.trim())) {
+      nextErrors.phone = 'Please enter a valid phone number';
     }
     if (!formData.service) nextErrors.service = 'Please select a service';
     if (!formData.details.trim()) nextErrors.details = 'Project details are required';
@@ -145,11 +150,12 @@ export default function LeadForm({
             <input
               id="phone"
               type="tel"
-              className="site-input"
+              className={`site-input ${errors.phone ? 'is-invalid' : ''}`}
               placeholder="+91 00000 00000"
               value={formData.phone}
               onChange={handleInputChange}
             />
+            {errors.phone ? <span className="form-error">{errors.phone}</span> : null}
           </div>
 
           <div className="form-field">

@@ -112,6 +112,63 @@ const SERVICE_DETAIL_LINKS = {
   'Real Sales Growth Tracking': '/services/inventory-catalog-sync',
 };
 
+const FEATURED_SERVICE_CARDS = [
+  {
+    icon: <AppWindow className="w-6 h-6" />,
+    title: 'Quick Commerce Onboarding',
+    desc: 'Launch products on Blinkit, Zepto, Instamart, and similar fast-commerce channels with clean setup and catalog readiness.',
+    to: '/services/blinkit-zepto-setup',
+    accent: 'blue',
+    metric: 'Launch-ready',
+    tags: ['Blinkit', 'Zepto', 'Instamart'],
+  },
+  {
+    icon: <Globe className="w-6 h-6" />,
+    title: 'Marketplace Store Management',
+    desc: 'Manage Amazon, Flipkart, Meesho, and marketplace stores with listing hygiene, offers, inventory checks, and reporting.',
+    to: '/services/flipkart-store-management',
+    accent: 'violet',
+    metric: 'Managed ops',
+    tags: ['Amazon', 'Flipkart', 'Meesho'],
+  },
+  {
+    icon: <Search className="w-6 h-6" />,
+    title: 'Product Ranking Optimization',
+    desc: 'Improve titles, keywords, images, pricing, and categories so priority products move toward stronger visibility.',
+    to: '/services/catalog-listing-support',
+    accent: 'orange',
+    metric: 'More visibility',
+    tags: ['SEO', 'Keywords', 'Catalog'],
+  },
+  {
+    icon: <Target className="w-6 h-6" />,
+    title: 'Real Sales Growth Tracking',
+    desc: 'Track clicks, orders, stock movement, best sellers, and weekly actions that keep growth measurable and practical.',
+    to: '/services/inventory-catalog-sync',
+    accent: 'green',
+    metric: 'Sales focused',
+    tags: ['Orders', 'Stock', 'Revenue'],
+  },
+  {
+    icon: <Code className="w-6 h-6" />,
+    title: 'Web & App Development',
+    desc: 'Build fast websites, apps, portals, SaaS products, and custom systems with clean UX and scalable engineering.',
+    to: '/services/web-applications',
+    accent: 'slate',
+    metric: 'Built to scale',
+    tags: ['React', 'Mobile', 'SaaS'],
+  },
+  {
+    icon: <Cpu className="w-6 h-6" />,
+    title: 'AI, Cloud & Data Systems',
+    desc: 'Connect automation, analytics, AI workflows, cloud infrastructure, and dashboards into real business operations.',
+    to: '/services/ai-ml-solutions',
+    accent: 'cyan',
+    metric: 'Automation ready',
+    tags: ['AI', 'Cloud', 'Data'],
+  },
+];
+
 const PARTNERSHIP_MODELS = [
   {
     icon: <HeartHandshake className="w-6 h-6" />,
@@ -227,7 +284,49 @@ export default function Services() {
         }
       />
 
-      <section id="core-services" className="section section-muted section-first">
+      <section className="section section-muted section-first services-featured-section">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Featured Services"
+            title="Choose the growth or technology service you need"
+            description="Start with a clickable service path — from quick commerce onboarding and marketplace management to web, app, AI, and cloud delivery."
+            align="center"
+          />
+
+          <div className="services-featured-grid">
+            {FEATURED_SERVICE_CARDS.map((service) => (
+              <Link
+                key={service.title}
+                to={service.to}
+                className={`services-featured-card services-featured-card--${service.accent} scroll-reveal`}
+                aria-label={`View details for ${service.title}`}
+              >
+                <div className="services-featured-card__top">
+                  <span className="services-featured-card__icon">{service.icon}</span>
+                  <span className="services-featured-card__arrow">
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  </span>
+                </div>
+                <div className="services-featured-card__body">
+                  <span className="services-featured-card__metric">{service.metric}</span>
+                  <h3>{service.title}</h3>
+                  <p>{service.desc}</p>
+                </div>
+                <div className="services-featured-card__tags">
+                  {service.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+                <span className="services-featured-card__cta">
+                  View details <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="core-services" className="section section-muted">
         <div className="container">
           <SectionHeading
             eyebrow="Core Services"

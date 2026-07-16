@@ -550,12 +550,12 @@ export function useSmoothScroll(pathname) {
       if (cancelled) return;
 
       const lenis = new Lenis({
-        duration: 1.1,
+        duration: 0.75,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smooth exponential ease
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
-        wheelMultiplier: 1.0,
+        wheelMultiplier: 1.25,
       });
 
       // Sync GSAP's ScrollTrigger with Lenis

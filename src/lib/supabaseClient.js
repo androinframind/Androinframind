@@ -33,7 +33,7 @@ export async function saveContact(contact) {
       return { success: true };
     }
 
-    const { data, error } = await supabase.from('contacts').insert([contact]).select();
+    const { error } = await supabase.from('contacts').insert([contact]);
     if (error) throw error;
 
     // Optional direct trigger (if Database Webhook is not configured)
@@ -45,7 +45,7 @@ export async function saveContact(contact) {
       console.warn('Edge function invocation skipped/failed:', funcErr);
     }
 
-    return { success: true, data };
+    return { success: true };
   } catch (error) {
     console.warn('Supabase contact insert failed, falling back to localStorage:', getErrorMessage(error));
     saveToLocal('andro_contacts', contact);
@@ -203,9 +203,9 @@ export async function saveJobApplication(app) {
       saveToLocal('andro_job_applications', app);
       return { success: true };
     }
-    const { data, error } = await supabase.from('job_applications').insert([app]).select();
+    const { error } = await supabase.from('job_applications').insert([app]);
     if (error) throw error;
-    return { success: true, data };
+    return { success: true };
   } catch (error) {
     // Do NOT silently fall back to localStorage — surface the real error
     // so it shows in the UI and can be debugged properly.

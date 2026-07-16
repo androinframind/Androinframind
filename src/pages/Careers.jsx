@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PageHero from '@/components/site/PageHero';
 import SectionHeading from '@/components/site/SectionHeading';
 import CTASection from '@/components/site/CTASection';
-import { Briefcase, MapPin, Clock, ArrowRight } from 'lucide-react';
+import { MapPin, Clock, ArrowRight } from 'lucide-react';
 import { fetchJobs, saveJobApplication } from '@/lib/supabaseClient';
 
 const PHONE_REGEX = /^(?:\+91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}$/;
@@ -251,7 +251,7 @@ export default function Careers() {
                     />
                   </div>
 
-                  <div className="form-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                  <div className="form-split">
                     <div className="form-field">
                       <label>Email Address*</label>
                       <input 

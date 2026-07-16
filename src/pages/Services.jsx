@@ -39,10 +39,17 @@ const CORE_SERVICES = [
   },
   {
     icon: <Megaphone className="w-6 h-6" />,
-    kicker: 'Digital Marketing',
+    kicker: 'Priority Growth Service',
     title: 'Data-Driven Growth Campaigns',
-    desc: 'Scale your user acquisition and maximize ROI. We design and manage target campaigns, search engine marketing (SEM), content strategy, social media campaigns, and conversion rate optimization (CRO) backed by clear analytics.',
+    desc: 'Scale your user acquisition and maximize ROI. We design and manage targeted campaigns, search engine marketing (SEM), content strategy, social media campaigns, and conversion rate optimization (CRO) backed by clear analytics.',
     techs: ['Google Ads', 'Meta Ads', 'Content Strategy', 'Analytics', 'Conversion Opt.']
+  },
+  {
+    icon: <Users className="w-6 h-6" />,
+    kicker: 'Priority Creator Growth',
+    title: 'Influencer Marketing Campaigns',
+    desc: 'Connect your brand with the right creators through influencer discovery, outreach, campaign briefs, content coordination, usage rights, and performance tracking focused on reach, trust, and conversions.',
+    techs: ['Creators', 'Instagram', 'YouTube', 'Briefs', 'Performance Tracking']
   },
   {
     icon: <Share2 className="w-6 h-6" />,
@@ -105,7 +112,8 @@ const SERVICE_DETAIL_LINKS = {
   'High-Performance Web Platforms': '/services/web-applications',
   'Native & Cross-Platform Mobile Apps': '/services/mobile-apps',
   'Technical & On-Page SEO Optimization': '/services/seo-digital-marketing',
-  'Data-Driven Growth Campaigns': '/services/seo-digital-marketing',
+  'Data-Driven Growth Campaigns': '/services/digital-marketing',
+  'Influencer Marketing Campaigns': '/services/influencer-marketing',
   'Quick Commerce Onboarding': '/services/blinkit-zepto-setup',
   'Catalog & Ranking Optimization': '/services/catalog-listing-support',
   'Offers, Ads & Conversion Push': '/services/seo-digital-marketing',
@@ -113,6 +121,24 @@ const SERVICE_DETAIL_LINKS = {
 };
 
 const FEATURED_SERVICE_CARDS = [
+  {
+    icon: <Megaphone className="w-6 h-6" />,
+    title: 'Digital Marketing',
+    desc: 'Priority growth campaigns across Google, Meta, SEO, social, content, analytics, and conversion paths built to generate measurable leads and sales.',
+    to: '/services/digital-marketing',
+    accent: 'blue',
+    metric: 'Priority growth',
+    tags: ['Google Ads', 'Meta Ads', 'SEO'],
+  },
+  {
+    icon: <Users className="w-6 h-6" />,
+    title: 'Influencer Marketing',
+    desc: 'Creator discovery, outreach, campaign briefs, content coordination, and performance tracking for trust-led brand awareness and conversions.',
+    to: '/services/influencer-marketing',
+    accent: 'violet',
+    metric: 'Creator reach',
+    tags: ['Creators', 'Instagram', 'YouTube'],
+  },
   {
     icon: <AppWindow className="w-6 h-6" />,
     title: 'Quick Commerce Onboarding',
@@ -288,8 +314,8 @@ export default function Services() {
         <div className="container">
           <SectionHeading
             eyebrow="Featured Services"
-            title="Choose the growth or technology service you need"
-            description="Start with a clickable service path — from quick commerce onboarding and marketplace management to web, app, AI, and cloud delivery."
+            title="Priority growth services plus technology delivery"
+            description="Start with the highlighted Digital Marketing and Influencer Marketing paths, then explore quick commerce, marketplace management, web, app, AI, and cloud delivery."
             align="center"
           />
 
@@ -330,8 +356,8 @@ export default function Services() {
         <div className="container">
           <SectionHeading
             eyebrow="Core Services"
-            title="Premium Web & Mobile Application Engineering"
-            description="Our primary focus is building scalable applications that feel reliable, load fast, and are easy to maintain."
+            title="Premium Engineering, Marketing & Growth Services"
+            description="Our primary focus is building scalable digital products and growth systems that feel reliable, load fast, convert better, and are easy to maintain."
             align="center"
           />
           <div className="grid-two">

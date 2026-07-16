@@ -70,7 +70,7 @@ function MainAppLayout() {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.shiftKey && e.key.toUpperCase() === 'A') {
         e.preventDefault();
-        navigate('/androinframaind/dashboard');
+        navigate('/dashboard');
       }
     };
 
@@ -111,6 +111,7 @@ function MainAppLayout() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/androinframaind/dashboard" element={<Dashboard />} />
             <Route path="*" element={<Home />} />
           </Routes>

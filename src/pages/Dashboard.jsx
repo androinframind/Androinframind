@@ -31,6 +31,7 @@ export default function Dashboard() {
     tagline: '',
     desc_text: '',
     badge: 'iOS App',
+    image_url: '',
     features: '',
   });
 
@@ -151,6 +152,7 @@ export default function Dashboard() {
       tagline: '',
       desc_text: '',
       badge: 'iOS App',
+      image_url: '',
       features: '',
     });
   };
@@ -164,6 +166,7 @@ export default function Dashboard() {
       tagline: proj.tagline,
       desc_text: proj.desc_text,
       badge: proj.badge,
+      image_url: proj.image_url || '',
       features: (proj.features || []).join('\n'),
     });
   };
@@ -177,6 +180,7 @@ export default function Dashboard() {
       tagline: projectForm.tagline.trim(),
       desc_text: projectForm.desc_text.trim(),
       badge: projectForm.badge.trim(),
+      image_url: projectForm.image_url.trim() || null,
       features: projectForm.features.split('\n').map(f => f.trim()).filter(Boolean),
     };
 
@@ -563,13 +567,24 @@ export default function Dashboard() {
 
                     <div className="form-field">
                       <label>Project Description*</label>
-                      <textarea 
-                        rows={4} 
-                        className="site-textarea" 
+                      <textarea
+                        rows={4}
+                        className="site-textarea"
                         value={projectForm.desc_text}
                         onChange={e => setProjectForm(prev => ({...prev, desc_text: e.target.value}))}
                         required
                         placeholder="Detailed explanation of the project features, challenges, and context."
+                      />
+                    </div>
+
+                    <div className="form-field">
+                      <label>Project Image URL</label>
+                      <input
+                        type="url"
+                        className="site-input"
+                        value={projectForm.image_url}
+                        onChange={e => setProjectForm(prev => ({...prev, image_url: e.target.value}))}
+                        placeholder="https://example.com/project-image.png"
                       />
                     </div>
 

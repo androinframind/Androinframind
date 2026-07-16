@@ -68,21 +68,21 @@ const GROUP_DEFAULTS = {
     platforms: ['AWS', 'GCP', 'Azure', 'Docker', 'GitHub Actions', 'Vercel', 'Cloudflare'],
   },
   'Growth Services': {
-    heroDescription: 'We combine technical execution, marketing systems, and conversion thinking to help digital products attract, convert, and retain better customers.',
-    overview: 'Our growth services connect product positioning, search visibility, campaigns, content, analytics, and conversion improvements. We focus on measurable movement, not vanity metrics.',
+    heroDescription: 'We combine technical execution, marketing systems, paid media, social growth, creator campaigns, and conversion thinking to help brands attract, convert, and retain better customers.',
+    overview: 'Our growth services connect positioning, search visibility, paid campaigns, social content, influencer collaborations, analytics, and conversion improvements. We focus on measurable movement, not vanity metrics.',
     outcomes: [
-      'Improved visibility through SEO, content, campaign, and platform optimization.',
-      'Better conversion through landing page, messaging, analytics, and funnel improvements.',
-      'Clear reporting around traffic, leads, sales movement, and next growth actions.',
+      'Improved visibility through SEO, paid ads, social content, creator partnerships, and platform optimization.',
+      'Better conversion through landing pages, messaging, analytics, audience targeting, and funnel improvements.',
+      'Clear reporting around traffic, leads, campaign performance, sales movement, and next growth actions.',
     ],
     process: [
-      { title: 'Growth audit', desc: 'We review traffic sources, conversion paths, offers, content, and analytics setup.' },
-      { title: 'Plan', desc: 'We prioritize SEO, content, campaigns, landing pages, or team support based on goals.' },
-      { title: 'Execution', desc: 'We implement campaigns, content, tracking, technical fixes, or growth workflows.' },
-      { title: 'Optimization', desc: 'We improve targeting, messaging, offers, and conversion paths using performance data.' },
-      { title: 'Reporting', desc: 'We provide clear updates on results, blockers, and next actions.' },
+      { title: 'Growth audit', desc: 'We review traffic sources, audience segments, conversion paths, offers, content, and analytics setup.' },
+      { title: 'Plan', desc: 'We prioritize SEO, paid campaigns, creator partnerships, content, landing pages, or team support based on goals.' },
+      { title: 'Execution', desc: 'We implement campaigns, content, tracking, creator briefs, technical fixes, or growth workflows.' },
+      { title: 'Optimization', desc: 'We improve targeting, messaging, offers, creators, and conversion paths using performance data.' },
+      { title: 'Reporting', desc: 'We provide clear updates on results, blockers, spend, reach, leads, and next actions.' },
     ],
-    platforms: ['Google Ads', 'Meta Ads', 'Search Console', 'GA4', 'LinkedIn', 'SEO Tools', 'CRM'],
+    platforms: ['Google Ads', 'Meta Ads', 'Instagram', 'YouTube', 'Search Console', 'GA4', 'LinkedIn', 'CRM'],
   },
   'Marketplace Management': {
     heroDescription: 'We manage marketplace stores, catalogs, offers, and performance actions to improve visibility, buyer trust, and real sales outcomes.',
@@ -158,7 +158,9 @@ const RAW_SERVICE_GROUPS = [
   {
     title: 'Growth Services',
     links: [
-      { slug: 'seo-digital-marketing', label: 'SEO & Digital Marketing', icon: '📣', focus: 'SEO, paid campaigns, content, and conversion-driven growth systems' },
+      { slug: 'digital-marketing', label: 'Digital Marketing', icon: '📣', focus: 'paid ads, SEO, social campaigns, analytics, conversion optimization, and full-funnel digital growth' },
+      { slug: 'influencer-marketing', label: 'Influencer Marketing', icon: '🤝', focus: 'creator discovery, influencer outreach, campaign briefs, content coordination, and performance tracking' },
+      { slug: 'seo-digital-marketing', label: 'SEO & Digital Marketing', icon: '🔎', focus: 'SEO, paid campaigns, content, and conversion-driven growth systems' },
       { slug: 'product-strategy', label: 'Product Strategy', icon: '🎯', focus: 'positioning, roadmap, user journeys, and launch planning' },
       { slug: 'staff-augmentation', label: 'Staff Augmentation', icon: '👥', focus: 'dedicated developers, designers, and delivery specialists for your team' },
     ],

@@ -154,6 +154,7 @@ export default function Projects() {
           tagline: p.tagline,
           desc: p.desc_text,
           icon: getProjectIcon(p.project_slug),
+          iconPath: p.image_url || null,
           badge: p.badge,
           features: p.features || []
         }));

@@ -36,9 +36,13 @@ CREATE TABLE IF NOT EXISTS public.projects (
     tagline TEXT NOT NULL,
     desc_text TEXT NOT NULL,
     badge TEXT NOT NULL,
+    image_url TEXT,
     features TEXT[] NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+-- Ensure existing projects tables also get the image URL column
+ALTER TABLE public.projects ADD COLUMN IF NOT EXISTS image_url TEXT;
 
 -- Enable RLS for projects
 ALTER TABLE public.projects ENABLE ROW LEVEL SECURITY;

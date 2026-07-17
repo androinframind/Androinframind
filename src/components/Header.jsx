@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, Menu, Search, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BrandMark from '@/components/site/BrandMark';
@@ -13,6 +13,43 @@ const NAV_LINKS = [
 ];
 
 const MOBILE_NAV_LINKS = NAV_LINKS.filter((link) => !link.mega);
+
+const SERVICE_CATEGORY_META = {
+  'Quick Commerce': {
+    icon: '⚡',
+    description: 'Fast-commerce setup, catalog readiness, ranking, offers, and real sales movement.',
+  },
+  'Marketing': {
+    icon: '📣',
+    description: 'Digital marketing, influencer campaigns, paid media, social content, analytics, and conversion growth.',
+  },
+  'Software Engineering': {
+    icon: '💻',
+    description: 'Custom software, web platforms, mobile apps, and scalable product engineering.',
+  },
+  'AI & Automation': {
+    icon: '🤖',
+    description: 'AI assistants, data systems, workflows, dashboards, and automation layers.',
+  },
+  'Cloud & DevOps': {
+    icon: '☁️',
+    description: 'Cloud infrastructure, CI/CD, monitoring, security foundations, and deployment reliability.',
+  },
+  'Growth Services': {
+    icon: '📈',
+    description: 'SEO, product strategy, team support, content, analytics, and conversion growth systems.',
+  },
+  'Marketplace Management': {
+    icon: '🛒',
+    description: 'Marketplace store management, catalog quality, offers, ads, and performance tracking.',
+  },
+  'Marketplace Onboarding': {
+    icon: '🏪',
+    description: 'Seller setup, product uploads, compliance checks, and clean marketplace launch support.',
+  },
+};
+
+const POPULAR_SERVICE_SLUGS = ['digital-marketing', 'influencer-marketing', 'blinkit-zepto-setup'];
 
 const SEARCH_DATA = [
   { type: 'page', icon: '🏠', title: 'Home', desc: 'AndroInfraMind — intelligent software and AI solutions', url: '/', keywords: 'home main landing' },
@@ -30,16 +67,72 @@ const SEARCH_DATA = [
   { type: 'project', icon: '🎓', title: 'LearnHub — EdTech Platform', desc: 'Education · LMS, live classes, personalized learning paths', url: '/projects', keywords: 'education edtech learnhub lms webrtc firebase python' },
 ];
 
+function normalizeText(value) {
+  return String(value || '').toLowerCase();
+}
+
+function getCategoryIcon(group) {
+  return SERVICE_CATEGORY_META[group.title]?.icon || group.links?.[0]?.icon || '•';
+}
+
+function getCategoryDescription(group) {
+  return SERVICE_CATEGORY_META[group.title]?.description || group.links?.[0]?.heroDescription || 'Explore focused services for this business goal.';
+}
+
+function groupMatchesQuery(group, query) {
+  if (!query) return true;
+
+  const categoryText = normalizeText(`${group.title} ${getCategoryDescription(group)}`);
+  const itemMatches = group.links.some((item) => normalizeText(`${item.label} ${item.focus}`).includes(query));
+
+  return categoryText.includes(query) || itemMatches;
+}
+
+function getVisibleServiceLinks(group, query) {
+  if (!group) return [];
+  if (!query) return group.links;
+
+  const categoryText = normalizeText(`${group.title} ${getCategoryDescription(group)}`);
+  if (categoryText.includes(query)) return group.links;
+
+  return group.links.filter((item) => normalizeText(`${item.label} ${item.focus}`).includes(query));
+}
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [serviceMegaQuery, setServiceMegaQuery] = useState('');
+  const [activeServiceCategory, setActiveServiceCategory] = useState(SERVICE_GROUPS[0]?.title || '');
+  const [expandedMobileServiceCategory, setExpandedMobileServiceCategory] = useState(SERVICE_GROUPS[0]?.title || '');
   const [scrolled, setScrolled] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const location = useLocation();
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
+
+  const normalizedServiceMegaQuery = serviceMegaQuery.trim().toLowerCase();
+
+  const filteredServiceGroups = useMemo(
+    () => SERVICE_GROUPS.filter((group) => groupMatchesQuery(group, normalizedServiceMegaQuery)),
+    [normalizedServiceMegaQuery],
+  );
+
+  const activeServiceGroup = useMemo(
+    () => filteredServiceGroups.find((group) => group.title === activeServiceCategory) || filteredServiceGroups[0] || null,
+    [activeServiceCategory, filteredServiceGroups],
+  );
+
+  const activeServiceLinks = useMemo(
+    () => getVisibleServiceLinks(activeServiceGroup, normalizedServiceMegaQuery),
+    [activeServiceGroup, normalizedServiceMegaQuery],
+  );
+
+  const popularMegaServices = useMemo(() => {
+    const allServices = SERVICE_GROUPS.flatMap((group) => group.links);
+    return POPULAR_SERVICE_SLUGS.map((slug) => allServices.find((service) => service.slug === slug)).filter(Boolean);
+  }, []);
 
   const closeMenu = () => setMenuOpen(false);
   const closeSearch = () => {
@@ -51,12 +144,37 @@ export default function Header() {
     closeMenu();
     closeSearch();
     setActiveDropdown(null);
+    setServiceMegaQuery('');
+  };
+
+  const handleMegaMenuWheel = (event) => {
+    const menu = event.currentTarget.querySelector('.nav-mega-menu');
+    if (!menu) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    menu.scrollTop += event.deltaY;
+  };
+
+  const handleCategoryKeyDown = (event, groupTitle) => {
+    if (!['ArrowDown', 'ArrowUp'].includes(event.key) || !filteredServiceGroups.length) return;
+
+    event.preventDefault();
+    const currentIndex = filteredServiceGroups.findIndex((group) => group.title === groupTitle);
+    const direction = event.key === 'ArrowDown' ? 1 : -1;
+    const nextIndex = (currentIndex + direction + filteredServiceGroups.length) % filteredServiceGroups.length;
+    setActiveServiceCategory(filteredServiceGroups[nextIndex].title);
   };
 
   useEffect(() => {
-    closeMenu();
-    closeSearch();
-    setActiveDropdown(null);
+    const timeoutId = window.setTimeout(() => {
+      closeMenu();
+      closeSearch();
+      setActiveDropdown(null);
+      setServiceMegaQuery('');
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -98,6 +216,7 @@ export default function Header() {
       if (event.key === 'Escape') {
         closeSearch();
         closeMenu();
+        setActiveDropdown(null);
       }
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault();
@@ -173,32 +292,114 @@ export default function Header() {
                       className="nav-dropdown-wrapper nav-mega-wrapper"
                       onMouseEnter={() => setActiveDropdown(link.label)}
                       onMouseLeave={() => setActiveDropdown(null)}
+                      onWheel={handleMegaMenuWheel}
                     >
                       <Link
                         to={link.to}
                         className={`site-nav-link ${isLinkActive(link.to) ? 'active' : ''}`}
                         onClick={handleNavigate}
+                        aria-haspopup="true"
+                        aria-expanded={activeDropdown === link.label}
                       >
                         {link.label} <ChevronDown className="dropdown-arrow-icon" style={{ width: 12, height: 12, display: 'inline-block', marginLeft: 4, verticalAlign: 'middle', transition: 'transform 0.2s ease' }} />
                       </Link>
                       {activeDropdown === link.label && (
-                        <div className="nav-mega-menu">
-                          {SERVICE_GROUPS.map((group) => (
-                            <div key={group.title} className={`nav-mega-group ${group.featured ? 'nav-mega-group-featured' : ''}`}>
-                              <h4>{group.title}</h4>
-                              {group.links.map((sub) => (
-                                <Link
-                                  key={`${group.title}-${sub.label}`}
-                                  to={sub.to}
-                                  className="nav-mega-item"
-                                  onClick={handleNavigate}
-                                >
-                                  <span className="nav-mega-icon" aria-hidden="true">{sub.icon}</span>
-                                  <span>{sub.label}</span>
+                        <div className="nav-mega-menu" role="menu" aria-label="Services menu">
+                          <aside className="nav-mega-sidebar" aria-label="Service categories">
+                            <label className="nav-mega-search">
+                              <Search className="w-4 h-4" aria-hidden="true" />
+                              <input
+                                type="search"
+                                value={serviceMegaQuery}
+                                onChange={(event) => setServiceMegaQuery(event.target.value)}
+                                placeholder="Search services..."
+                                autoComplete="off"
+                              />
+                            </label>
+
+                            <div className="nav-mega-category-list" role="tablist" aria-label="Service categories">
+                              {filteredServiceGroups.length ? (
+                                filteredServiceGroups.map((group) => {
+                                  const isActiveCategory = activeServiceGroup?.title === group.title;
+
+                                  return (
+                                    <button
+                                      key={group.title}
+                                      type="button"
+                                      role="tab"
+                                      aria-selected={isActiveCategory}
+                                      className={`nav-mega-category ${isActiveCategory ? 'active' : ''}`}
+                                      onMouseEnter={() => setActiveServiceCategory(group.title)}
+                                      onClick={() => setActiveServiceCategory(group.title)}
+                                      onKeyDown={(event) => handleCategoryKeyDown(event, group.title)}
+                                    >
+                                      <span className="nav-mega-category-icon" aria-hidden="true">{getCategoryIcon(group)}</span>
+                                      <span className="nav-mega-category-copy">
+                                        <strong>{group.title}</strong>
+                                        <small>{getVisibleServiceLinks(group, normalizedServiceMegaQuery).length} services</small>
+                                      </span>
+                                    </button>
+                                  );
+                                })
+                              ) : (
+                                <div className="nav-mega-empty">No service matches found.</div>
+                              )}
+                            </div>
+                          </aside>
+
+                          <section key={activeServiceGroup?.title || 'empty-services'} className="nav-mega-detail" aria-live="polite">
+                            {activeServiceGroup ? (
+                              <>
+                                <div className="nav-mega-detail-header">
+                                  <span className="nav-mega-detail-icon" aria-hidden="true">{getCategoryIcon(activeServiceGroup)}</span>
+                                  <div>
+                                    <span className="nav-mega-eyebrow">Selected category</span>
+                                    <h3>{activeServiceGroup.title}</h3>
+                                    <p>{getCategoryDescription(activeServiceGroup)}</p>
+                                  </div>
+                                </div>
+
+                                <div className="nav-mega-service-list">
+                                  {activeServiceLinks.length ? (
+                                    activeServiceLinks.map((sub) => (
+                                      <Link
+                                        key={`${activeServiceGroup.title}-${sub.label}`}
+                                        to={sub.to}
+                                        className="nav-mega-service-link"
+                                        onClick={handleNavigate}
+                                      >
+                                        <span className="nav-mega-icon" aria-hidden="true">{sub.icon}</span>
+                                        <span className="nav-mega-service-copy">
+                                          <strong>{sub.label}</strong>
+                                          {sub.focus ? <small>{sub.focus}</small> : null}
+                                        </span>
+                                        <ArrowRight className="nav-mega-service-arrow w-4 h-4" aria-hidden="true" />
+                                      </Link>
+                                    ))
+                                  ) : (
+                                    <div className="nav-mega-empty">No links inside this category match your search.</div>
+                                  )}
+                                </div>
+                              </>
+                            ) : (
+                              <div className="nav-mega-empty nav-mega-empty-large">Try another search term or view all services.</div>
+                            )}
+                          </section>
+
+                          <aside className="nav-mega-rail" aria-label="Popular services">
+                            <span className="nav-mega-eyebrow">Popular this month</span>
+                            <div className="nav-mega-popular-list">
+                              {popularMegaServices.map((service) => (
+                                <Link key={service.slug} to={service.to} className="nav-mega-popular-link" onClick={handleNavigate}>
+                                  <span className="nav-mega-icon" aria-hidden="true">{service.icon}</span>
+                                  <span>{service.label}</span>
                                 </Link>
                               ))}
                             </div>
-                          ))}
+                            <Link to="/services" className="nav-mega-view-all" onClick={handleNavigate}>
+                              View all services <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                            </Link>
+                          </aside>
                         </div>
                       )}
                     </div>
@@ -234,17 +435,37 @@ export default function Header() {
             ))}
             <div className="mobile-services-menu">
               <span className="mobile-services-title">Services</span>
-              {SERVICE_GROUPS.map((group) => (
-                <div key={group.title} className={`mobile-services-group ${group.featured ? 'mobile-services-group-featured' : ''}`}>
-                  <strong>{group.title}</strong>
-                  {group.links.map((sub) => (
-                    <Link key={`${group.title}-${sub.label}`} to={sub.to} className="mobile-service-link" onClick={handleNavigate}>
-                      <span className="nav-mega-icon" aria-hidden="true">{sub.icon}</span>
-                      <span>{sub.label}</span>
-                    </Link>
-                  ))}
-                </div>
-              ))}
+              {SERVICE_GROUPS.map((group) => {
+                const isExpanded = expandedMobileServiceCategory === group.title;
+
+                return (
+                  <div key={group.title} className={`mobile-services-group ${group.featured ? 'mobile-services-group-featured' : ''} ${isExpanded ? 'active' : ''}`}>
+                    <button
+                      type="button"
+                      className="mobile-services-group-toggle"
+                      aria-expanded={isExpanded}
+                      onClick={() => setExpandedMobileServiceCategory((current) => (current === group.title ? '' : group.title))}
+                    >
+                      <span>
+                        <span className="nav-mega-icon" aria-hidden="true">{getCategoryIcon(group)}</span>
+                        <strong>{group.title}</strong>
+                      </span>
+                      <ChevronDown className="mobile-services-chevron w-4 h-4" aria-hidden="true" />
+                    </button>
+
+                    {isExpanded ? (
+                      <div className="mobile-services-links">
+                        {group.links.map((sub) => (
+                          <Link key={`${group.title}-${sub.label}`} to={sub.to} className="mobile-service-link" onClick={handleNavigate}>
+                            <span className="nav-mega-icon" aria-hidden="true">{sub.icon}</span>
+                            <span>{sub.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

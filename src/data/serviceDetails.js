@@ -16,6 +16,23 @@ const GROUP_DEFAULTS = {
     ],
     platforms: ['Blinkit', 'Zepto', 'Swiggy Instamart', 'Amazon', 'Flipkart', 'Meesho', 'Shopify'],
   },
+  'Marketing': {
+    heroDescription: 'We help brands grow with digital marketing, influencer campaigns, paid media, social content, analytics, and conversion-focused execution.',
+    overview: 'Our marketing services connect paid campaigns, SEO, social media, creator partnerships, campaign tracking, and conversion improvements so brands can attract the right audience and turn attention into measurable leads or sales.',
+    outcomes: [
+      'Stronger visibility through paid ads, SEO, social campaigns, and creator partnerships.',
+      'Better conversion through audience targeting, landing page messaging, analytics, and funnel improvements.',
+      'Clear reporting around reach, traffic, leads, campaign performance, sales movement, and next actions.',
+    ],
+    process: [
+      { title: 'Marketing audit', desc: 'We review your audience, current channels, content, campaigns, analytics, and conversion path.' },
+      { title: 'Campaign strategy', desc: 'We prioritize digital ads, SEO, social content, creators, offers, and tracking based on your growth goal.' },
+      { title: 'Execution setup', desc: 'We prepare campaigns, creator briefs, content calendars, landing pages, pixels, and reporting dashboards.' },
+      { title: 'Optimization', desc: 'We improve targeting, messaging, budget allocation, creators, creatives, and conversion paths using data.' },
+      { title: 'Performance reporting', desc: 'We share practical updates on reach, clicks, leads, spend, sales, blockers, and next growth actions.' },
+    ],
+    platforms: ['Google Ads', 'Meta Ads', 'Instagram', 'YouTube', 'LinkedIn', 'GA4', 'Search Console', 'CRM'],
+  },
   'Software Engineering': {
     heroDescription: 'We design, build, and scale robust digital products with clean architecture, reliable engineering, and long-term maintainability.',
     overview: 'Our software engineering services cover planning, UX-ready implementation, backend/API systems, integrations, testing, deployment, and handover. We focus on systems that are fast, secure, maintainable, and easy for teams to operate.',
@@ -132,6 +149,14 @@ const RAW_SERVICE_GROUPS = [
     ],
   },
   {
+    title: 'Marketing',
+    featured: true,
+    links: [
+      { slug: 'digital-marketing', label: 'Digital Marketing', icon: '📣', focus: 'paid ads, SEO, social campaigns, analytics, conversion optimization, and full-funnel digital growth' },
+      { slug: 'influencer-marketing', label: 'Influencer Marketing', icon: '🤝', focus: 'creator discovery, influencer outreach, campaign briefs, content coordination, and performance tracking' },
+    ],
+  },
+  {
     title: 'Software Engineering',
     links: [
       { slug: 'custom-software', label: 'Custom Software', icon: '💻', focus: 'custom backend, workflow, dashboard, and API solutions' },
@@ -158,11 +183,9 @@ const RAW_SERVICE_GROUPS = [
   {
     title: 'Growth Services',
     links: [
-      { slug: 'digital-marketing', label: 'Digital Marketing', icon: '📣', focus: 'paid ads, SEO, social campaigns, analytics, conversion optimization, and full-funnel digital growth' },
-      { slug: 'influencer-marketing', label: 'Influencer Marketing', icon: '🤝', focus: 'creator discovery, influencer outreach, campaign briefs, content coordination, and performance tracking' },
       { slug: 'seo-digital-marketing', label: 'SEO & Digital Marketing', icon: '🔎', focus: 'SEO, paid campaigns, content, and conversion-driven growth systems' },
       { slug: 'product-strategy', label: 'Product Strategy', icon: '🎯', focus: 'positioning, roadmap, user journeys, and launch planning' },
-      { slug: 'staff-augmentation', label: 'Staff Augmentation', icon: '👥', focus: 'dedicated developers, designers, and delivery specialists for your team' },
+      // { slug: 'staff-augmentation', label: 'Staff Augmentation', icon: '👥', focus: 'dedicated developers, designers, and delivery specialists for your team' },
     ],
   },
   {
